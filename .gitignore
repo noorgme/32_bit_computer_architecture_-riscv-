@@ -1,0 +1,6 @@
+vbuddy.cfg
+**/.vscode/
+**/.obj_dir/
+**/obj_dir/
+**/.DS_Store
+*.vcd

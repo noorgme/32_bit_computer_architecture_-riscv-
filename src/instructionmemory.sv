@@ -11,7 +11,7 @@ module instructionmemory #(
 logic [DATA_WIDTH-1:0] rom_array [2**ADDR_WIDTH-1:0];
 
 initial begin
-    $display("Loading program ROM...");
+    $display("Loading instruction ROM...");
     $readmemh("./src/tb_resources/magic_rom_8x32.mem", rom_array);
 end;
 

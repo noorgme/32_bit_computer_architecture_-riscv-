@@ -1,9 +1,10 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "Valu_regfile.h"
-#include <assert.h>
+#include "lib/testutils.h"
 
 int main(int argc, char **argv, char **env) {
+    int f1=0,f2=1,f3=1;
     Verilated::commandArgs(argc, argv);
     Valu_regfile * top = new Valu_regfile;
     Verilated::traceEverOn(true);
@@ -23,12 +24,18 @@ int main(int argc, char **argv, char **env) {
         }else{
             top->immop = simcycle;
         }
-        top->r[0] = ((simcycle-2)%32)*((simcycle>31)&&(simcycle!=110)&&(simcycle!=111));
+        top->r1 = ((simcycle-2)%32)*((simcycle>31)&&(simcycle!=110)&&(simcycle!=111));
         top->alusrc = (simcycle<32)||(simcycle==111)||(simcycle==110);
         top->regwrite = simcycle<32||simcycle>109;
-        top->r[1] = (simcycle-1)%32;
-        top->r[2] = (simcycle)%32;
+        top->r2 = (simcycle-1)%32;
+        top->r3 = (simcycle)%32;
         top->eval();
+        if(simcycle>=110){
+            assert_message(f3 == top->aluout,"was %d should have been %d",top->aluout,f3);
+            f3 = f1 + f2;
+            f1 = f2;
+            f2 = f3;
+        }
     }
     tfp->close(); 
     exit(0);

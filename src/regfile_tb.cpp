@@ -12,17 +12,17 @@ int main(int argc, char **argv, char **env) {
     tfp->open ("regfile.vcd");
     top->clk = 0;
     top->we3 = 0;
-    top->a[0] = top->a[1]= top->a[2] = top->wd3 = 0;
+    top->a1 = top->a2= top->a3 = top->wd3 = 0;
     for(int simcycle=1;simcycle<100;simcycle++){
         for(int i=0;i<2;i++){
             tfp->dump(2*simcycle+i);
             top->clk = !top->clk;
             top->eval();
         }
-        top->a[2] = simcycle%32;
+        top->a3 = simcycle%32;
         top->wd3 = simcycle*2 + 1;
-        top->a[0] = simcycle%32 + simcycle%2;
-        top->a[1] = (simcycle-2)%32;
+        top->a1 = simcycle%32 + simcycle%2;
+        top->a2 = (simcycle-2)%32;
         top->we3 = simcycle<32;
         top->eval();
     }

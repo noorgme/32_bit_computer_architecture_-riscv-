@@ -1,22 +1,36 @@
 module alu #(
     parameter DATA_WIDTH = 32,CONTROLL_WIDTH = 3
 )(
-    input logic [DATA_WIDTH-1:0] op[2],
+    input logic [DATA_WIDTH-1:0] op1,op2,
     input logic [CONTROLL_WIDTH-1:0] ctrl,
     output logic [DATA_WIDTH-1:0] aluout,
-    output logic eq
+    output logic zero
 );
 
-    typedef enum [2:0]{ADD=0,SUB=1} alumodes;
+    typedef enum [2:0]{ADD=0,SUB=1,AND=2,OR=3,SLT=5} alumodes;
+    int signed op1sin = op1, op2sin = op2;
 
     always_comb begin
         case (ctrl)
-            ADD:    aluout = {op[0] + op[1]}[DATA_WIDTH-1:0];
-            SUB:    aluout = {op[0] - op[1]}[DATA_WIDTH-1:0];
-            default: aluout = op[0];
+            ADD:    aluout = {op1 + op2}[DATA_WIDTH-1:0];
+            SUB:    aluout = {op1 - op2}[DATA_WIDTH-1:0];
+            AND:    aluout = {op1 & op2};
+            OR:     aluout = {op1 | op2};
+            SLT:begin
+                if(op1<op2) aluout = op1;
+                else aluout = op2;
+            end
+            default: aluout = op1;
         endcase
-        if(op[0]==op[1]) eq=1;
-        else eq=0;
+        zero = 0;
+        case (ctrl)
+            ADD:    if(op1 == op2) zero = 1;
+            SUB:    if(op1sin >= op2sin) zero = 1;
+            AND:    if(op1 >= op2) zero = 1;
+            OR:     if(op1sin < op2sin) zero = 1;
+            SLT:    if(op1 < op2) zero = 1;
+            default: aluout = op1;
+        endcase
     end
 
 endmodule

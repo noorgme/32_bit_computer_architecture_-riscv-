@@ -25,7 +25,6 @@ int main(int argc, char **argv, char **env) {
 
         // Sign extending 12 bits up to 32 bits. If bit 12 of imm is high, bitwise OR with 1s in every position above 12 otherwise with 0
         uint signextended = (uint)top->imm | (((uint)top->imm & 0x800) ? 0xFFFFFF000 : 0);
-        if (signextended == 4) {signextended = 2;};
         assert_message (top->immop == signextended, "Testing setting imm=%d... after eval immop=%d, calculated should have been %d", i, top->immop, signextended);
         
     }

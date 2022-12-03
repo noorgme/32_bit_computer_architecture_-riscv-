@@ -1,4 +1,4 @@
-#include "VpcTop.h"
+#include "Vpc.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include <stdlib.h>
@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env) {
 
     Verilated::commandArgs(argc, argv);
     // init top verilog instance
-    VpcTop* top = new VpcTop;
+    Vpc* top = new Vpc;
     // init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;

@@ -43,7 +43,18 @@ always_comb begin
         alu_src_b = immext;
     else 
         alu_src_b = regfile_d2;
-end
+end;
+
+/* verilator lint_off PINMISSING */
+// need this for unused count pin
+programcounter #() programcounter (
+    .ImmOp(immext),
+    .clk(clk_i),
+    .PCsrc(pcsrc),
+    .rst(rst_i),
+    .pc(pc)
+);
+/* verilator lint_on PINMISSING */
 
 instructionmemory #(BITNESS, INSTR_WIDTH) instructionmemory (
     .clk_i(clk_i),

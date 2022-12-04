@@ -1,4 +1,4 @@
-module pc #(
+module programcounter #(
     parameter                                   DATA_WIDTH = 32
 )(
     input logic     [DATA_WIDTH-1:0]            ImmOp,
@@ -18,7 +18,7 @@ module pc #(
         end
 
     always_comb
-        if (rst == 1'b1)            next_PC = DATA_WIDTH'b0;
+        if (rst == 1'b1)            next_PC = 'b0;
         else if (PCsrc == 1'b1)     next_PC = {pc + ImmOp}[DATA_WIDTH-1:0];
-        else                        next_PC = {pc + DATA_WIDTH'b100}[DATA_WIDTH-1:0];
+        else                        next_PC = {pc + 'b100}[DATA_WIDTH-1:0];
 endmodule

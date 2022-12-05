@@ -18,3 +18,18 @@ Dec 1: Wrote instruction memory and a testbench which checks that value changes 
 ### `signextend.sv` and `signextend_tb.cpp`
 #### Patrick Beart:
 Nov 30-Dec 1: Copied sign extension I wrote from lab 4 and added assert_message use
+
+### `alu.sv` and `alu_tb.cpp`
+
+#### Ollie Cosgrove:
+Dec 2: Coppied over the code form LAB 4 <br>
+Dec 3: Eddited `alu.sv` to include new functions and comparisons and wrote a testbench to test the ALU every test came back okay. 
+### `regfile.sv` and `regfile_tb.cpp` 
+#### Ollie Cosgrove:
+
+Dec 2: Coppied over from LAB 4 along with `aluregfile.sv` and `aluregfile_tb.cpp` <br>
+Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using fibonacci numbers as this would test all the functionality.
+
+
+
+

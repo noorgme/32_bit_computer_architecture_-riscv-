@@ -23,7 +23,10 @@ logic [1:0] immsrc;
 
 logic [BITNESS-1:0] result;
 
+/* verilator lint_off UNUSED */
+// we keep some bits of a0 unused in case we want to use it as a debug output or similar: there is no disadvantage to having it exposed to the main module
 logic [BITNESS-1:0] a0;
+/* verilator lint_on UNUSED */
 
 logic [BITNESS-1:0] immext;
 
@@ -35,6 +38,10 @@ logic alu_eq;
 
 logic pcsrc;
 
+logic resultsrc;
+
+logic [BITNESS-1:0] readdata;
+
 
 always_comb begin
     data_out_o = a0[7:0];
@@ -43,6 +50,11 @@ always_comb begin
         alu_src_b = immext;
     else 
         alu_src_b = regfile_d2;
+
+    if (resultsrc)
+        result = readdata;
+    else
+        result = aluresult;
 end;
 
 /* verilator lint_off PINMISSING */
@@ -96,8 +108,9 @@ controlunit #() controlunit(
 );
 
 signextend #() signextend(
-    .imm(instr[31:7]),
-    .immop(immext)
+    .toextend_i(instr[31:7]),
+    .immsrc_i(immsrc),
+    .immop_o(immext)
 );
 
 endmodule

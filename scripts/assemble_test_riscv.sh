@@ -1,9 +1,21 @@
-mkdir ./test/assemble/build
+#!/bin/bash -e
 
-cp "$1" ./test/assemble/build/source.s
+if [[ ! -f "$1" ]]
+then
+    echo "Error: no such file $1, exiting"
+    exit 1
+fi
 
-make -C ./test/assemble hexfile
+rm -rf ./scripts/assemble/.build 2> /dev/null
 
-cp ./test/assemble/build/source.s.hex src/tb_resources/programmemory.mem
+mkdir ./scripts/assemble/.build
+
+cp "$1" ./scripts/assemble/.build/source.s
+
+make -C ./scripts/assemble hexfile
+
+mkdir ./src/generated 2> /dev/null
+
+cp ./scripts/assemble/.build/source.s.hex ./src/generated/instructionmemory.tmp.mem
 
 ./scripts/build.sh riscv

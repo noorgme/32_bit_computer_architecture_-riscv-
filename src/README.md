@@ -30,6 +30,15 @@ Dec 3: Eddited `alu.sv` to include new functions and comparisons and wrote a tes
 Dec 2: Coppied over from LAB 4 along with `aluregfile.sv` and `aluregfile_tb.cpp` <br>
 Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using fibonacci numbers as this would test all the functionality.
 
+### 'pc.sv' and 'programCounter_tb.cpp'
+#### Jackson Barlow:
+Dec 3: Added single .sv file program counter and test file for it (untested), then updated test file to use correct verilated file
+Dec 4: Corrected error in pc.sv, where test file expected to use extra output "count" (This is necessary for testing but will be removed for final use)
+
+### 'datamemory.sv'
+#### Jackson Barlow:
+Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently
+
 
 
 

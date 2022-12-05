@@ -29,7 +29,7 @@ module alu #(
             AND:    if(op1 >= op2) zero = 1;
             OR:     if(op1sin < op2sin) zero = 1;
             SLT:    if(op1 < op2) zero = 1;
-            default: aluout = op1;
+            default: zero = 0;
         endcase
     end
 

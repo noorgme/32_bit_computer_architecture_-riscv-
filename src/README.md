@@ -35,9 +35,9 @@ Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using fibonacci num
 Dec 3: Added single .sv file program counter and test file for it (untested), then updated test file to use correct verilated file
 Dec 4: Corrected error in `pc.sv`, where test file expected to use extra output "count" (This is necessary for testing but will be removed for final use)
 
-### `datamemory.sv`
+### `datamemory.sv` and `datamemory_tb.cpp`
 #### Jackson Barlow:
-Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently
+Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently, created `datamemory_tb.cpp` with some errors
 
 
 

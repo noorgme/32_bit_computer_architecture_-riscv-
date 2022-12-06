@@ -1,6 +1,7 @@
 module datamemory #(
     parameter   DATA_WIDTH = 32, 
-                ADDRESS_WIDTH = 16
+                ADDRESS_WIDTH = 32,
+                MEMORY_SIZE = 16
 )(
     input logic     [ADDRESS_WIDTH-1:0] address,
     input logic     [DATA_WIDTH-1:0]    write_data,
@@ -9,13 +10,17 @@ module datamemory #(
     output logic    [DATA_WIDTH-1:0]    read_data
 );
 
-    logic [DATA_WIDTH-1:0] data_mem [2**ADDRESS_WIDTH-1:0];
+    logic [DATA_WIDTH-1:0] data_mem [2**MEMORY_SIZE-1:0];
+
+    always_comb begin
+        if(0 != {address}[ADDRESS_WIDTH-1:MEMORY_SIZE+2]) $error("%m address out of range");
+    end
 
     always_ff @(posedge clk) 
         begin
-            read_data <= data_mem[address];
+            read_data <= data_mem[{address}[MEMORY_SIZE+1:2]];
             if (write_enable == 1'b1) 
-                data_mem[address] <= write_data;
+                data_mem[{address}[MEMORY_SIZE+1:2]] <= write_data;
         end
 
 endmodule

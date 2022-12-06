@@ -27,7 +27,7 @@ int main (int argc, char **argv, char **env) {
             top->eval();
         }
 
-        top->address = count;
+        top->address = count<<2;
         top->write_data = 500 - i;
         
         if (i == 40) {
@@ -40,7 +40,6 @@ int main (int argc, char **argv, char **env) {
             top->write_enable = 1;
             count = 0;
         }
-        
         count = count + 1;
         
         if (Verilated::gotFinish()) exit(0);

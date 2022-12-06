@@ -37,8 +37,28 @@ Dec 4: Corrected error in `pc.sv`, where test file expected to use extra output 
 
 ### `datamemory.sv` and `datamemory_tb.cpp`
 #### Jackson Barlow:
-Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently, created `datamemory_tb.cpp` with some errors
+Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently, created `datamemory_tb.cpp`
+Dec 6: Test data & results for datamemory, test data updated to include write & read test:
 
+|RAM Location|DataStored|DataRead (next cycle)|
+| --- | --- | --- |
+|1|1CB|1CB|
+|2|1CA|1CA|
+|...|...|...|
+|12|1BA|1BA|
+|13|1B9|1B9|
+
+We then continue to read this again with write enable = 1, and if the output from memory is still the value before it is changed, then the datamemory component is working correctly
+
+|RAM Location|DataRead (next cycle)|
+| --- | --- |
+|1|1CB|
+|2|1CA|
+|...|...|
+|12|1BA|
+|13|1B9|
+
+Here, we can see that everything is working as expected & `datamemory.sv` is correct
 
 
 

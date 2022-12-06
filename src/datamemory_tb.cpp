@@ -36,6 +36,9 @@ int main (int argc, char **argv, char **env) {
         } else if (i == 60) {
             top->write_enable = 0;
             count = 0;
+        } else if (i == 70) {
+            top->write_enable = 1;
+            count = 0;
         }
         
         count = count + 1;

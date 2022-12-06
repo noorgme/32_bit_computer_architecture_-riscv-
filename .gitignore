@@ -4,3 +4,4 @@ vbuddy.cfg
 **/obj_dir/
 **/.DS_Store
 *.vcd
+*.s.hex

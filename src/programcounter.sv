@@ -11,7 +11,7 @@ module programcounter #(
 
     logic           [DATA_WIDTH-1:0]            next_PC;
 
-    always_ff @(posedge clk)
+    always_ff @(negedge clk)
         begin
             pc <= next_PC;
             count <= count + 1'b1;

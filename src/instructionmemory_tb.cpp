@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **env) {
   top->clk_i= 0;
   uint last_out = top->dout_o;
   // run simulation for MAX_SIM_CYC clock cycles
-  for (int i=0; i<255; i++) {
+  for (int i=0; i<255; i=i+4) {
     top->addr_i = i;
     top->eval();
     tfp->dump (i*3);

@@ -14,7 +14,10 @@ cp "$1" ./scripts/assemble/.build/source.s
 
 make -C ./scripts/assemble hexfile
 
-mkdir ./src/generated 2> /dev/null
+if [[ ! -d "./src/generated" ]] 
+then
+    mkdir ./src/generated
+fi
 
 cp ./scripts/assemble/.build/source.s.hex ./src/generated/instructionmemory.tmp.mem
 

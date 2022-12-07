@@ -60,7 +60,7 @@ else
     done
 fi
 
-if [ "$error_log"!="" ]
+if ! [[ -z $error_log ]]
 then
     echo
     echo "::::::: Warnings: :::::: "

@@ -79,7 +79,7 @@ programcounter #() programcounter (
 );
 /* verilator lint_on PINMISSING */
 
-instructionmemory #(BITNESS, INSTR_WIDTH) instructionmemory (
+instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
     .clk_i(clk_i),
     .addr_i(pc),
     .dout_o(instr)

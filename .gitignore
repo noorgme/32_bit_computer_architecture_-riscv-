@@ -4,3 +4,5 @@ vbuddy.cfg
 **/obj_dir/
 **/.DS_Store
 *.vcd
+scripts/assemble/.build/
+src/generated/*.tmp.*

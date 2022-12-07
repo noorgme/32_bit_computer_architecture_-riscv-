@@ -12,10 +12,6 @@ module datamemory #(
 
     logic [DATA_WIDTH-1:0] data_mem [2**MEMORY_SIZE-1:0];
 
-    always_comb begin
-        if(0 != {address}[ADDRESS_WIDTH-1:MEMORY_SIZE+2]) $error("%m address out of range");
-    end
-
     always_ff @(posedge clk) 
         begin
             read_data <= data_mem[{address}[MEMORY_SIZE+1:2]];

@@ -62,7 +62,7 @@ always_comb begin
     else 
         alu_src_b = regfile_d2;
 
-    if (resultsrc)
+    if (!resultsrc)
         result = readdata;
     else
         result = aluresult;

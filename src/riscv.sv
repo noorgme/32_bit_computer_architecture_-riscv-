@@ -4,7 +4,10 @@ module riscv #(
     parameter REG_ADDR_WIDTH = 5
 ) (
     input logic rst_i,
+    /* verilator lint_off UNUSED */
+    // not using int_i for anything just yet
     input logic int_i,
+    /* verilator lint_on UNUSED */
     input logic clk_i,
     output logic [7:0] data_out_o
 );
@@ -40,7 +43,15 @@ logic pcsrc;
 
 logic resultsrc;
 
+logic memwrite;
+
 logic [BITNESS-1:0] readdata;
+
+wire  instr_funct7_5  = instr[30];
+
+wire [2:0] instr_funct3  = instr[14:12];
+
+wire [6:0] instr_op = instr[6:0];
 
 
 always_comb begin
@@ -94,17 +105,26 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .a0(a0)
 );
 
-// todo: datamemory
+datamemory #() datamemory(
+    .address(aluresult),
+    .write_data(regfile_d2),
+    .write_enable(memwrite),
+    .clk(clk_i),
+    .read_data(readdata)
+);
 
-controlunit #() controlunit(
-    .eq(alu_eq),
-    .instr(instr),
-    .PCsrc(pcsrc),
-    //.ResultSrc(ResultSrc),
+controlUnit #() controlunit(
+    .funct3(instr_funct3),
+    .funct7_5(instr_funct7_5),
+    .zero(alu_eq),
+    .op(instr_op),
+    .PCSrc(pcsrc),
+    .ResultSrc(resultsrc),
     .RegWrite(regwrite),
-    .ALUctrl(alu_ctrl),
-    .ALUsrc(alusrc),
-    .ImmSrc(immsrc)
+    .ALUControl(alu_ctrl),
+    .ALUSrc(alusrc),
+    .ImmSrc(immsrc),
+    .MemWrite(memwrite)
 );
 
 signextend #() signextend(

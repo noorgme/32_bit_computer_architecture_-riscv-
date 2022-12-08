@@ -7,7 +7,7 @@ module alu #(
     output logic zero
 );
 
-    typedef enum [2:0]{ADD=0,SUB=1,AND=2,OR=3,SLT=5} alumodes;
+    typedef enum [2:0]{ADD=0,SUB=1,AND=2,OR=3,SLT=5,SRL=7} alumodes;
     int signed op1sin = op1, op2sin = op2;
 
     always_comb begin
@@ -20,6 +20,7 @@ module alu #(
                 if(op1<op2) aluout = op1;
                 else aluout = op2;
             end
+            SRL:    aluout = {op1 >> op2}[DATA_WIDTH-1:0];
             default: aluout = op1;
         endcase
         zero = 0;

@@ -11,7 +11,8 @@ module controlUnit (
     output logic [2:0] ALUControl,
     output logic ALUSrc,
     output logic [1:0] ImmSrc,
-    output logic RegWrite
+    output logic RegWrite,
+    output logic [2:0] DATAMEMControl
 );
 wire BranchWire;
 wire [1:0] ALUOpWire;
@@ -40,7 +41,8 @@ aluDecoder aluDecoder (
     .op5 (op[5]),
     .ALUOp (ALUOpWire),
 //Outputs
-    .ALUControl (ALUControl)
+    .ALUControl (ALUControl),
+    .DATAMEMControl (DATAMEMControl)
 );
 
 

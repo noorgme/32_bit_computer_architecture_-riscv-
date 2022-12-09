@@ -45,6 +45,8 @@ logic resultsrc;
 
 logic memwrite;
 
+logic [2:0] DATAMEMControl;
+
 logic [BITNESS-1:0] readdata;
 
 wire  instr_funct7_5  = instr[30];
@@ -77,7 +79,7 @@ programcounter #() programcounter (
     .rst(rst_i),
     .pc(pc)
 );
-/* verilator lint_on PINMISSING */
+
 
 instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
     .clk_i(clk_i),
@@ -109,6 +111,7 @@ datamemory #() datamemory(
     .address(aluresult),
     .write_data(regfile_d2),
     .write_enable(memwrite),
+    .DATAMEMControl(DATAMEMControl),
     .clk(clk_i),
     .read_data(readdata)
 );
@@ -122,6 +125,7 @@ controlUnit #() controlunit(
     .ResultSrc(resultsrc),
     .RegWrite(regwrite),
     .ALUControl(alu_ctrl),
+    .DATAMEMControl(DATAMEMControl),
     .ALUSrc(alusrc),
     .ImmSrc(immsrc),
     .MemWrite(memwrite)
@@ -132,5 +136,6 @@ signextend #() signextend(
     .immsrc_i(immsrc),
     .immop_o(immext)
 );
+/* verilator lint_on PINMISSING */
 
 endmodule

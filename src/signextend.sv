@@ -21,7 +21,7 @@ always_comb
         end
         default begin
             // shouldn't happen
-            immop_o = 32'hDEADBEEF;
+            immop_o = 32'hDEADBEEF; //lol
         end
     endcase
 endmodule

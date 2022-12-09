@@ -42,7 +42,7 @@ module mainDecoder (
                                     Branch = 1'b0;                               
                                     end
             7'b0100011 : begin //S-type
-                        ALUOp =  2'b10;
+                        ALUOp =  2'b00;
                         ALUSrc =  1'b1;
                         ResultSrc = 1'b0; //x
                         RegWrite = 1'b0;

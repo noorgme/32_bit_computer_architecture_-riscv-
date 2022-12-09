@@ -19,9 +19,12 @@ always_comb
             immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], toextend_i[11:8], 1'b0};
             //immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], 4'b1, 1'b0};
         end
+        2'b11: begin
+            immop_o = {toextend_i[31:12],12'b0};
+        end
         default begin
             // shouldn't happen
-            immop_o = 32'hDEADBEEF;
+            immop_o = 32'hDEADBEEF; //lol
         end
     endcase
 endmodule

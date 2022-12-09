@@ -6,3 +6,4 @@ vbuddy.cfg
 *.vcd
 scripts/assemble/.build/
 src/generated/*.tmp.*
+/disasm_filter.txt

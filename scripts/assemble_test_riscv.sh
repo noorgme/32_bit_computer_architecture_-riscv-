@@ -4,7 +4,7 @@ relpath=$(find ./test/samples/ -iname $1.riscv.s)
  
 if [[ ! -f "$relpath" ]]
 then
-    echo "Error: no such file $relpath, exiting"
+    echo "Error: no such file $1, exiting"
     exit 1
 fi
 

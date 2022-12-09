@@ -1,8 +1,10 @@
 #!/bin/bash -e
 
-if [[ ! -f "$1" ]]
+relpath=$(find ./test/samples/ -iname $1.riscv.s)
+ 
+if [[ ! -f "$relpath" ]]
 then
-    echo "Error: no such file $1, exiting"
+    echo "Error: no such file $relpath, exiting"
     exit 1
 fi
 
@@ -10,7 +12,7 @@ rm -rf ./scripts/assemble/.build 2> /dev/null
 
 mkdir ./scripts/assemble/.build
 
-cp "$1" ./scripts/assemble/.build/source.s
+cp "$relpath" ./scripts/assemble/.build/source.s
 
 make -C ./scripts/assemble hexfile
 

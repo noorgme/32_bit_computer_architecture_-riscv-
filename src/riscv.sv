@@ -20,7 +20,7 @@ logic [INSTR_WIDTH-1:0] instr;
 
 logic regwrite;
 
-logic alusrc;
+logic [1:0] alusrc;
 
 logic [1:0] immsrc;
 
@@ -33,13 +33,13 @@ logic [BITNESS-1:0] a0;
 
 logic [BITNESS-1:0] immext;
 
-logic [2:0] alu_ctrl;
+logic [3:0] alu_ctrl;
 
 logic [BITNESS-1:0] aluresult;
 
 logic alu_eq;
 
-logic pcsrc;
+wire [1:0] pcsrc;
 
 logic resultsrc;
 
@@ -53,14 +53,20 @@ wire [2:0] instr_funct3  = instr[14:12];
 
 wire [6:0] instr_op = instr[6:0];
 
+wire [BITNESS-1:0] PCplus4;
+
 
 always_comb begin
     data_out_o = a0[7:0];
 
-    if (alusrc)
+    if (alusrc == 2'b01)
         alu_src_b = immext;
-    else 
+    else if (alusrc == 2'b00)
         alu_src_b = regfile_d2;
+    else if (alusrc == 2'b10)
+        alu_src_b = PCplus4;
+    else
+        alu_src_b = 'b1111111;
 
     if (!resultsrc)
         result = readdata;
@@ -75,7 +81,8 @@ programcounter #() programcounter (
     .clk(clk_i),
     .PCsrc(pcsrc),
     .rst(rst_i),
-    .pc(pc)
+    .pc(pc),
+    .pcplus4(PCplus4)
 );
 /* verilator lint_on PINMISSING */
 
@@ -85,7 +92,7 @@ instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructi
     .dout_o(instr)
 );
 
-alu #(BITNESS,3) alu (
+alu #(BITNESS,4) alu (
     .op1(alu_src_a),
     .op2(alu_src_b),
     .ctrl(alu_ctrl),

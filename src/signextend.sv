@@ -10,15 +10,16 @@ module signextend (
 always_comb
     case(immsrc_i)
         2'b00: begin
-            immop_o = {{20{toextend_i[31]}}, toextend_i[31:20]};
+            immop_o = {{20{toextend_i[31]}}, toextend_i[31:20]}; //I-type op form
         end
         2'b01: begin
-            immop_o = {{20{toextend_i[31]}}, toextend_i[31:25], toextend_i[11:7]};
+            immop_o = {{20{toextend_i[31]}}, toextend_i[31:25], toextend_i[11:7]}; //S-type Imm form
         end
         2'b10: begin
-            immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], toextend_i[11:8], 1'b0};
+            immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], toextend_i[11:8], 1'b0}; //B-type Imm form
             //immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], 4'b1, 1'b0};
         end
+        2'b11: immop_o = {{12{toextend_i[31]}}, toextend_i[19:12], toextend_i[20], toextend_i[30:21], 1'b0}; //JAL Imm Form (20-bit imm)
         default begin
             // shouldn't happen
             immop_o = 32'hDEADBEEF;

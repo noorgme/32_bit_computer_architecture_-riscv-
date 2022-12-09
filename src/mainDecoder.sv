@@ -35,7 +35,7 @@ module mainDecoder (
             7'b0000011, 7'b0010011 : begin //I-type
                                     ALUOp =  2'b00;
                                     ALUSrc =  1'b1;
-                                    ResultSrc = 1'b1;
+                                    ResultSrc = op[4];
                                     RegWrite = 1'b1;
                                     MemWrite = 1'b0;
                                     ImmSrc = 2'b00;

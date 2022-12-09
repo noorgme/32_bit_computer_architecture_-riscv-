@@ -1,6 +1,7 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "Vdatamemory.h"
+#include <cmath>
 
 int main (int argc, char **argv, char **env) {
     Verilated::commandArgs(argc, argv);
@@ -14,23 +15,25 @@ int main (int argc, char **argv, char **env) {
 
     top->clk = 1;
     top->address = 0;
-    top->write_data = 0;
-    top->write_enable = 0;
+    top->write_data = 2882400152;
+    top->write_enable = 1;
+    top->DATAMEMControl = 0;
     int count = 0;
     int clk;
     int i;
 
-    for (i=0; i<500;i++) {
+    for (i=0; i<100;i++) {
         for (clk=0; clk<2; clk++) {
             tfp->dump(2*i+clk);
             top->clk = !top->clk;
             top->eval();
         }
-
+        top->DATAMEMControl = i/100;
         top->address = count;
-        top->write_data = count;
-        top->write_enable = count<250 & count%2 == 1;
-        if(i%2==0) count++;
+        top->write_enable = (i/150)<130 && i%3 == 1;
+        if(i%6==0){ 
+            count++;
+        }
         // if (i == 40) {
         //     top->write_enable = 1;
         //     count = 0;
@@ -41,7 +44,7 @@ int main (int argc, char **argv, char **env) {
         //     top->write_enable = 1;
         //     count = 0;
         // }
-        i++;
+        top->eval();
         if (Verilated::gotFinish()) exit(0);
     }
     tfp->close();

@@ -18,6 +18,7 @@ module datamemory #(
     logic [15:0]   tmph_out;
 
     always_comb begin
+        d_out = data_mem[{address}[MEMORY_SIZE+1:2]];
         tmpb_out = {d_out >> shiftb}[7:0];
         tmph_out = {d_out >> shifth}[15:0];
         d_in = 32'b0;
@@ -27,15 +28,15 @@ module datamemory #(
         case(DATAMEMControl)
             {3'b000}:begin
                 tmp_intop = {d_out >> (shiftb+8)}[31:0];
-                tmp_inbottom = {d_out << shiftb}[31:0];
+                tmp_inbottom = {d_out << (32-shiftb)}[31:0];
                 read_data = {{24{tmpb_out[7]}}, tmpb_out}; //lb
-                d_in = {{tmp_intop,write_data[7:0],tmp_inbottom}>>shiftb}[31:0]; //sb
+                d_in = {{tmp_intop,write_data[7:0],tmp_inbottom}>>(32-shiftb)}[31:0]; //sb
             end
             {3'b001}: begin
                 tmp_intop = {d_out >> (shiftb+16)}[31:0];
-                tmp_inbottom = {d_out << shiftb}[31:0];
+                tmp_inbottom = {d_out << (32-shiftb)}[31:0];
                 read_data = {{16{tmph_out[15]}},tmph_out}; //lh
-                d_in = {{tmp_intop,write_data[15:0],tmp_inbottom}>>shifth}[31:0]; //sh
+                d_in = {{tmp_intop,write_data[15:0],tmp_inbottom}>>(32-shifth)}[31:0]; //sh
             end
             {3'b010}: begin
                 read_data = d_out; //lw
@@ -52,7 +53,6 @@ module datamemory #(
 
     always_ff @(posedge clk)
         begin
-            d_out <= data_mem[{address}[MEMORY_SIZE+1:2]];
             if (write_enable == 1'b1) 
                 data_mem[{address}[MEMORY_SIZE+1:2]] <= d_in;
         end

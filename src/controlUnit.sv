@@ -12,6 +12,7 @@ module controlUnit (
     output logic ALUSrc,
     output logic [1:0] ImmSrc,
     output logic RegWrite,
+    output logic RegSrc,
     output logic [2:0] DATAMEMControl
 );
 wire BranchWire;
@@ -29,6 +30,7 @@ mainDecoder mainDecoder(
     .ALUSrc (ALUSrc),
     .ResultSrc (ResultSrc),
     .RegWrite (RegWrite),
+    .RegSrc (RegSrc),
     .MemWrite (MemWrite),
     .ALUOp (ALUOpWire)
 

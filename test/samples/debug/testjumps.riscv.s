@@ -14,7 +14,7 @@ addi a0, x0, 0x60 # 6
 
 addi a2, x0, 0b101 # 7
 
-bne a2,a2, shouldreachagain # 8
+beq a2,a2, shouldreachagain # 8
 
 shouldntreachagain:
 #li a0, 0XBADBEEF2

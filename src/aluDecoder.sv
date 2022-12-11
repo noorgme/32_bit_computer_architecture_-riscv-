@@ -5,13 +5,11 @@ module aluDecoder (
     input logic       op5,
     input logic [1:0] ALUOp,
 //Ouputs
-    output logic [3:0] ALUControl,
-    output logic [2:0] DATAMEMControl
+    output logic [3:0] ALUControl
 );
 
 
 always_comb begin
-    DATAMEMControl = {funct3[2:0]};
     casez({ALUOp, funct3, {op5, funct7_5}})
         {2'b00, 3'b?, 2'b?} : ALUControl = 4'b0000; //add (for lw, sw)
         {2'b10, 3'b000, 2'b00}, {2'b10, 3'b000, 2'b01}, {2'b10, 3'b000, 2'b10}: ALUControl = 4'b0000; //add

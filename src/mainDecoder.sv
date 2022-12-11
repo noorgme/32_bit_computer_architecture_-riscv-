@@ -60,9 +60,9 @@ module mainDecoder (
                         Branch = 2'b00;               
                         end
             7'b1101111 : begin //JAL
-                        ALUOp =  2'b01;
+                        ALUOp =  2'b11;
                         ALUSrc = 1'b1;
-                        ResultSrc = 2'b00;
+                        ResultSrc = 2'b10;
                         RegWrite = 1'b1; //To store Return address into rd (PC+4)
                         MemWrite = 1'b0;
                         ImmSrc = 3'b011; //Need Imm20 for jump address

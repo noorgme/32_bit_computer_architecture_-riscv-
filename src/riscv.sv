@@ -39,13 +39,11 @@ logic [BITNESS-1:0] aluresult;
 
 logic alu_eq;
 
-wire [1:0] pcsrc;
+wire  pcsrc;
 
 logic [1:0] resultsrc;
 
 logic memwrite;
-
-logic [2:0] DATAMEMControl;
 
 logic [BITNESS-1:0] readdata;
 
@@ -127,7 +125,7 @@ datamemory #() datamemory(
     .address(aluresult),
     .write_data(regfile_d2),
     .write_enable(memwrite),
-    .DATAMEMControl(DATAMEMControl),
+    .DATAMEMControl(instr_funct3),
     .clk(clk_i),
     .read_data(readdata)
 );
@@ -141,7 +139,6 @@ controlUnit #() controlunit(
     .ResultSrc(resultsrc),
     .RegWrite(regwrite),
     .ALUControl(alu_ctrl),
-    .DATAMEMControl(DATAMEMControl),
     .ALUSrc(alusrc),
     .ImmSrc(immsrc),
     .MemWrite(memwrite)

@@ -11,12 +11,10 @@ module controlUnit (
     output logic [3:0] ALUControl,
     output logic         ALUSrc,
     output logic [2:0] ImmSrc,
-    output logic RegWrite,
-    output logic [2:0] DATAMEMControl
+    output logic RegWrite
 );
 wire [1:0] BranchWire;
 wire [1:0] ALUOpWire;
-
 always_comb
     begin
     if ((BranchWire==2'b01) && (zero==1'b1))
@@ -51,8 +49,7 @@ aluDecoder aluDecoder (
     .op5 (op[5]),
     .ALUOp (ALUOpWire),
 //Outputs
-    .ALUControl (ALUControl),
-    .DATAMEMControl (DATAMEMControl)
+    .ALUControl (ALUControl)
 );
 
 

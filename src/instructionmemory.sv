@@ -4,7 +4,7 @@ module instructionmemory #(
     /* verilator lint_off UNUSED */
     parameter   ADDR_WIDTH = 10,
                 DATA_WIDTH = 32,
-                SOURCE_FILE = "JALtest.mem",
+                SOURCE_FILE = "magic_rom_8x32.mem",
                 SPACE_WIDTH = 8
     
     
@@ -19,7 +19,7 @@ logic [DATA_WIDTH-1:0] rom_array [2**SPACE_WIDTH-1:0];
 
 initial begin
     $display("Loading instruction ROM...");
-    $readmemh({"/home/noorgme/Documents/iac/riscv2/src/generated/",SOURCE_FILE}, rom_array);
+    $readmemh({"./src/generated/",SOURCE_FILE}, rom_array);
     $display("Done loading");
 end;
 

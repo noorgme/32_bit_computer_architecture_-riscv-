@@ -20,9 +20,13 @@ logic [INSTR_WIDTH-1:0] instr;
 
 logic regwrite;
 
+logic RegSrc;
+
+logic [BITNESS-1:0] Regdatain;
+
 logic [1:0] alusrc;
 
-logic [1:0] immsrc;
+logic [2:0] immsrc;
 
 logic [BITNESS-1:0] result;
 
@@ -44,6 +48,8 @@ wire [1:0] pcsrc;
 logic resultsrc;
 
 logic memwrite;
+
+logic [2:0] DATAMEMControl;
 
 logic [BITNESS-1:0] readdata;
 
@@ -72,6 +78,10 @@ always_comb begin
         result = readdata;
     else
         result = aluresult;
+
+    if (RegSrc) Regdatain = immext;
+    else Regdatain = result;
+    
 end;
 
 /* verilator lint_off PINMISSING */
@@ -85,6 +95,7 @@ programcounter #() programcounter (
     .pcplus4(PCplus4)
 );
 /* verilator lint_on PINMISSING */
+
 
 instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
     .clk_i(clk_i),
@@ -106,7 +117,7 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .a1(instr[19:15]),
     .a2(instr[24:20]),
     .a3(instr[11:7]),
-    .wd3(result),
+    .wd3(Regdatain),
     .rd1(alu_src_a),
     .rd2(regfile_d2),
     .a0(a0)
@@ -116,6 +127,7 @@ datamemory #() datamemory(
     .address(aluresult),
     .write_data(regfile_d2),
     .write_enable(memwrite),
+    .DATAMEMControl(DATAMEMControl),
     .clk(clk_i),
     .read_data(readdata)
 );
@@ -129,8 +141,10 @@ controlUnit #() controlunit(
     .ResultSrc(resultsrc),
     .RegWrite(regwrite),
     .ALUControl(alu_ctrl),
+    .DATAMEMControl(DATAMEMControl),
     .ALUSrc(alusrc),
     .ImmSrc(immsrc),
+    .RegSrc(RegSrc),
     .MemWrite(memwrite)
 );
 
@@ -139,5 +153,6 @@ signextend #() signextend(
     .immsrc_i(immsrc),
     .immop_o(immext)
 );
+
 
 endmodule

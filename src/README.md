@@ -61,5 +61,9 @@ We then continue to read this again with write enable = 1, and if the output fro
 
 Here, we can see that everything is working as expected & `datamemory.sv` is correct
 
+#### Ollie Cosgrove:
+
+Dec 7: Changed `datamemory.sv` slightly so the first to bits are ignored and the size of the memory can be set with a parameter as it is not possible to have a data memory of 4Gb.
+
 
 

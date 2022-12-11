@@ -1,4 +1,3 @@
-lui a0, 0xABCDE
 addi t1, zero, 0xAB
 addi t2, zero, 0xCD
 addi t3, zero, 0xEF

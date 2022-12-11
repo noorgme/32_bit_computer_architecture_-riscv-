@@ -33,7 +33,7 @@ logic [BITNESS-1:0] a0;
 
 logic [BITNESS-1:0] immext;
 
-logic [3:0] alu_ctrl;
+logic [2:0] alu_ctrl;
 
 logic [BITNESS-1:0] aluresult;
 
@@ -101,7 +101,7 @@ instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructi
     .dout_o(instr)
 );
 
-alu #(BITNESS,4) alu (
+alu #(BITNESS,3) alu (
     .op1(alu_src_a),
     .op2(alu_src_b),
     .ctrl(alu_ctrl),

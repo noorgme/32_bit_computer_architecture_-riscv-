@@ -24,4 +24,4 @@ jal x0, shouldntreachagain # 10
 shouldreachagain:
 #li a0, 0XF00DBEEF
 addi a0, x0, 0xAC # 11
-jal x0, shouldreachagain # 12
+jal a0, shouldreachagain # 12

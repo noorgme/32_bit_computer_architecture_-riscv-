@@ -20,9 +20,7 @@ always_comb
             //immop_o = {{20{toextend_i[31]}}, toextend_i[7], toextend_i[30:25], 4'b1, 1'b0};
         end
         3'b011: immop_o = {{12{toextend_i[31]}}, toextend_i[19:12], toextend_i[20], toextend_i[30:21], 1'b0}; //JAL Imm Form (20-bit imm)
-        3'b100: begin
-            immop_o = {toextend_i[31:12],12'b0};//LUI form
-        end
+        3'b100: immop_o = {toextend_i[31:12],12'b0}; //lui
         default begin
             // shouldn't happen
             immop_o = 32'hDEADBEEF; //lol

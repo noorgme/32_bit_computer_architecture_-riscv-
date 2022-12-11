@@ -78,7 +78,9 @@ Dec 8: Implemented JAL instruction with the following top-level changes
 ### `mainDecoder.sv`, `aluDecoder.sv`, `controlUnit.sv`
 #### Noor Elsheikh
 Dec 3: Pushed my top-level schematic from initial lab
+
 Dec 4: Created first draft of control unit
+
 Dec 5: Finalised aluDecoder and mainDecoder with respective gtkwave simulations and top-level tests, merged changes to main.
    
 

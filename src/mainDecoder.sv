@@ -71,7 +71,7 @@ module mainDecoder (
             7'b0110111 : begin //lui
                         ALUOp =  2'b00;
                         ALUSrc =  1'b0;
-                        ResultSrc = 2'b00;
+                        ResultSrc = 2'b01;
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b011;

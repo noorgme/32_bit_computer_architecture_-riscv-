@@ -13,8 +13,13 @@ always_comb begin
     casez({ALUOp, funct3, {op5, funct7_5}})
         {2'b00, 3'b?, 2'b?} : ALUControl = 3'b000; //add (for lw, sw)
         {2'b10, 3'b000, 2'b00}, {2'b10, 3'b000, 2'b01}, {2'b10, 3'b000, 2'b10}: ALUControl = 3'b000; //add
-        {2'b01, 3'b?, 2'b?} : ALUControl = 3'b001; //subtract (for beq)
-        {2'b10, 3'b000, 2'b11} : ALUControl = 3'b001; //subtract
+        {2'b01, 3'b001, 2'b?} : ALUControl = 3'b001; //bne
+        {2'b01, 3'b000, 2'b?} : ALUControl = 3'b000; //beq
+        {2'b01, 3'b101, 2'b?} : ALUControl = 3'b011; //blt
+        {2'b01, 3'b100, 2'b?} : ALUControl = 3'b110; //bge
+        {2'b01, 3'b101, 2'b?} : ALUControl = 3'b101; //bltu
+        {2'b01, 3'b110, 2'b?} : ALUControl = 3'b010; //bgeu
+        {2'b10, 3'b111, 2'b11} : ALUControl = 3'b001; //subtract
         {2'b10, 3'b111, 2'b?} : ALUControl = 3'b010; //and
         {2'b10, 3'b110, 2'b?} : ALUControl = 3'b011; //or
         {2'b10, 3'b100, 2'b?} : ALUControl = 3'b100; //xor

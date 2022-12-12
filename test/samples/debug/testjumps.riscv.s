@@ -14,7 +14,7 @@ addi a0, x0, 0x60 # 6
 
 addi a2, x0, 0b101 # 7
 
-bne a2,a2, shouldreachagain # 8
+beq a2,a2, shouldreachagain # 8
 
 shouldntreachagain:
 #li a0, 0XBADBEEF2
@@ -24,4 +24,17 @@ jal x0, shouldntreachagain # 10
 shouldreachagain:
 #li a0, 0XF00DBEEF
 addi a0, x0, 0xAC # 11
-jal x0, shouldreachagain # 12
+jal ra, reachfuther # 12
+li a0, 0xB00B1E5 #13-14
+jal end #15
+
+shouldntreachagainlol:
+#li a0, 0XBADBEEF2
+addi a0, x0, 0xB9 # 16
+jal x0, shouldntreachagainlol # 17
+
+reachfuther:
+ret #18
+
+end:
+    jal end #19

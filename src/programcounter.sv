@@ -3,22 +3,21 @@ module programcounter #(
 )(
     input logic     [DATA_WIDTH-1:0]            ImmOp,
     input logic                                 clk,
-    input logic                                 PCsrc,
+    input logic        [1:0]                    PCsrc,
     input logic                                 rst,
+    input logic     [DATA_WIDTH-1:0]            ALUresult,
     output logic    [DATA_WIDTH-1:0]            pc,
-    output logic    [DATA_WIDTH-1:0]            count
+    output logic    [DATA_WIDTH-1:0]            pcplus4
 );
 
-    logic           [DATA_WIDTH-1:0]            next_PC;
+    always_comb pcplus4 = {pc + 4}[DATA_WIDTH-1:0];
 
-    always_ff @(posedge clk)
+    always_ff @(negedge clk)
         begin
-            pc <= next_PC;
-            count <= count + 1'b1;
+        if (rst == 1'b1)            pc <= 'b0; //Reset PC
+        else if (PCsrc == 2'b01)    pc <= {pc + ImmOp}[DATA_WIDTH-1:0]; //B-type generic and JAL
+        else if (PCsrc == 2'b10)    pc <= ALUresult;
+        else                        pc <= pcplus4; //Increment PC by 4
         end
-
-    always_comb
-        if (rst == 1'b1)            next_PC = 'b0;
-        else if (PCsrc == 1'b1)     next_PC = {pc + ImmOp}[DATA_WIDTH-1:0];
-        else                        next_PC = {pc + 'b100}[DATA_WIDTH-1:0];
+        
 endmodule

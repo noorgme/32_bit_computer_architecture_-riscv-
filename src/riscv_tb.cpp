@@ -34,7 +34,7 @@ int main(int argc, char **argv, char **env) {
   tfp->dump(count);
   count++;
 
-  while (count < 101) {
+  while (count < 10000) {
     count++;
     top->clk_i = !top->clk_i;
     top->eval();

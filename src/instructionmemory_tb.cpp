@@ -17,22 +17,19 @@ int main(int argc, char **argv, char **env) {
   tfp->open ("instructionmemory.vcd");
  
   // initialize simulation inputs
-  top->clk_i= 0;
   uint last_out = top->dout_o;
   // run simulation for MAX_SIM_CYC clock cycles
   for (int i=0; i<255; i=i+4) {
     top->addr_i = i;
     top->eval();
-    tfp->dump (i*3);
-    assert_message(top->dout_o == last_out, "Set addr to %d, before clocking dout_o should still be %d, but was %d", top->addr_i, last_out, top->dout_o);
-    top->clk_i = 1;
-    top->eval();
-    tfp->dump (i*3+1);
-    assert_message(top->dout_o != last_out, "Set addr to %d, after clocking dout_o should no longer be %d, but was %d", top->addr_i, last_out, top->dout_o);
     last_out = top->dout_o;
-    top->clk_i = 0;
-    top->eval ();
-    tfp->dump (i*3+2);
+    tfp->dump (i*2);
+    assert_message(top->dout_o == last_out, "Set addr to %d, before eval dout_o should still be %d, but was %d", top->addr_i, last_out, top->dout_o);
+    i=i+4;
+    top->addr_i = i;
+    top->eval();
+    assert_message(top->dout_o != last_out, "Set addr to %d, after eval dout_o shouldn't still be %d", top->addr_i, last_out);
+    tfp->dump(i*2+1);
   }
 
   tfp->close(); 

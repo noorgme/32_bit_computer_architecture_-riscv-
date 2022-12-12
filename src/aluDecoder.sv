@@ -7,13 +7,10 @@ module aluDecoder (
 //Ouputs
 
     output logic [3:0] ALUControl
-    output logic [2:0] DATAMEMControl
-
 );
 
 
 always_comb begin
-    DATAMEMControl = {funct3[2:0]};
     casez({ALUOp, funct3, {op5, funct7_5}})
         {2'b00, 3'b?, 2'b?} : ALUControl = 4'b0000; //add (for lw, sw)
         {2'b10, 3'b000, 2'b00}, {2'b10, 3'b000, 2'b01}, {2'b10, 3'b000, 2'b10}: ALUControl = 4'b0000; //add
@@ -26,6 +23,7 @@ always_comb begin
         {2'b10, 3'b001, 2'b?} : ALUControl = 4'b0110; //shift left logical
         {2'b10, 3'b101, 2'b?0} : ALUControl = 4'b0111; //shift right logical
         {2'b10, 3'b101, 2'b?1} : ALUControl = 4'b1000; //shift right arithmetic
+        {2'b11, 3'b?, 2'b?} : ALUControl = 4'b0000; //JALR!
         default : ALUControl = 4'b0000;
     endcase
 end 

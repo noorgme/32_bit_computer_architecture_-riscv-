@@ -36,30 +36,30 @@ int main(int argc, char **argv, char **env) {
             top->eval();
         }
 
-        if(top->count == 5000) {
+        if(i == 5000) {
             top->rst = 1;
         }
 
-        if(top->count == 1000) {
+        if(i == 1000) {
             top->rst = 0;
         }
 
-        if(top->count == 1500) {
+        if(i == 1500) {
             top->PCsrc = 1;
         }
 
-        if(top->count == 2000) {
+        if(i == 2000) {
             top->rst = 1;
         }
 
-        if(top->count == 2001) {
+        if(i == 2001) {
             top->rst = 0;
             top->ImmOp = 4294967295;
         } else {
             top->ImmOp = rand() % RAND_MAX;
         }
         
-        if(top->count == 2002) {
+        if(i == 2002) {
             top->PCsrc = 0;
         }
 

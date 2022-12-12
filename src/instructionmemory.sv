@@ -9,7 +9,6 @@ module instructionmemory #(
     
     
 )(
-    input logic clk_i,
     input logic [ADDR_WIDTH-1:0] addr_i,
     output logic [DATA_WIDTH-1:0] dout_o
     // verilator lint_on UNUSED

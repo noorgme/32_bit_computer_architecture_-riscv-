@@ -96,7 +96,6 @@ programcounter #() programcounter (
 
 
 instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
-    .clk_i(clk_i),
     .addr_i(pc),
     .dout_o(instr)
 );

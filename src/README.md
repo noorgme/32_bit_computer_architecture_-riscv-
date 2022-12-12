@@ -65,5 +65,24 @@ Here, we can see that everything is working as expected & `datamemory.sv` is cor
 
 Dec 7: Changed `datamemory.sv` slightly so the first to bits are ignored and the size of the memory can be set with a parameter as it is not possible to have a data memory of 4Gb.
 
+### `riscv.sv` and `riscv_tb.cpp`
+#### Noor Elsheikh:
+Dec 8: Implemented JAL instruction with the following top-level changes
+   - New Immediate format added for ImmSrc=0b11, outputting a 20-bit immediate for Jump target address
+   - PCSrc extended to 2 bits
+   - ALUControl extended to 4 bits
+   - Branch internal control unit signal extended to 2 bits
+   - ALUSrc extended to 2 bits
+   - Added PC+4 output to Program counter
+
+### `mainDecoder.sv`, `aluDecoder.sv`, `controlUnit.sv`
+#### Noor Elsheikh
+Dec 3: Pushed my top-level schematic from initial lab
+
+Dec 4: Created first draft of control unit
+
+Dec 5: Finalised aluDecoder and mainDecoder with respective gtkwave simulations and top-level tests, merged changes to main.
+   
+
 
 

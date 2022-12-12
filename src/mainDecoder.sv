@@ -79,7 +79,7 @@ module mainDecoder (
                         end
             7'b1100111 : begin //JALR
                         ALUOp =  2'b00;
-                        ALUSrc = 1'b0;
+                        ALUSrc = 1'b1;
                         ResultSrc = 2'b10;
                         RegWrite = 1'b1; 
                         MemWrite = 1'b0;

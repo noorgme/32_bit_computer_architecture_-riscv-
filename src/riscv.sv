@@ -33,7 +33,7 @@ logic [BITNESS-1:0] a0;
 
 logic [BITNESS-1:0] immext;
 
-logic [2:0] alu_ctrl;
+logic [3:0] alu_ctrl;
 
 logic [BITNESS-1:0] aluresult;
 

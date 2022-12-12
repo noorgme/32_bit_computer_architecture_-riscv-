@@ -8,7 +8,7 @@ module controlUnit (
     output logic PCSrc, //Select PC:=PC+4 (Sel0) or PC:=PC+ImmOp (Sel1) 
     output logic ResultSrc,
     output logic MemWrite,
-    output logic [2:0] ALUControl,
+    output logic [3:0] ALUControl,
     output logic ALUSrc,
     output logic [1:0] ImmSrc,
     output logic RegWrite

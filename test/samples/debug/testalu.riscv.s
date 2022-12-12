@@ -4,3 +4,10 @@ addi a0, a0, 0b10
 addi a4, x0, 0b0
 addi a4, a0, 0b1
 sub a0, x0, a4
+and a4, a4, 0b1111
+or a4, a4 0b0
+slt a4, a4, 0b1111
+sll a4, a4, 0b1
+srl a4, a4, 0b1
+add a4, a4, 0b1
+srl a4, a4, 0b11

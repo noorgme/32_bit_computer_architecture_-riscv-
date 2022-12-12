@@ -9,7 +9,6 @@ module instructionmemory #(
     
     
 )(
-    input logic clk_i,
     input logic [ADDR_WIDTH-1:0] addr_i,
     output logic [DATA_WIDTH-1:0] dout_o
     // verilator lint_on UNUSED
@@ -23,7 +22,6 @@ initial begin
     $display("Done loading");
 end;
 
-always_ff @(posedge clk_i)
-    dout_o <= rom_array[{{addr_i}[ADDR_WIDTH-1:2]}[SPACE_WIDTH-1:0]];
+always_comb dout_o = rom_array[{{addr_i}[ADDR_WIDTH-1:2]}[SPACE_WIDTH-1:0]];
 
 endmodule

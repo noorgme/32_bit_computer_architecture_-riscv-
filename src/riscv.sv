@@ -20,13 +20,9 @@ logic [INSTR_WIDTH-1:0] instr;
 
 logic regwrite;
 
-logic RegSrc;
-
-logic [BITNESS-1:0] Regdatain;
-
 logic alusrc;
 
-logic [1:0] immsrc;
+logic [2:0] immsrc;
 
 logic [BITNESS-1:0] result;
 
@@ -43,13 +39,11 @@ logic [BITNESS-1:0] aluresult;
 
 logic alu_eq;
 
-logic pcsrc;
+wire [1:0] pcsrc;
 
-logic resultsrc;
+logic [1:0] resultsrc;
 
 logic memwrite;
-
-logic [2:0] DATAMEMControl;
 
 logic [BITNESS-1:0] readdata;
 
@@ -59,23 +53,32 @@ wire [2:0] instr_funct3  = instr[14:12];
 
 wire [6:0] instr_op = instr[6:0];
 
+wire [BITNESS-1:0] PCplus4;
+
 
 always_comb begin
     data_out_o = a0[7:0];
 
-    if (alusrc)
+    if (alusrc == 1'b1)
         alu_src_b = immext;
-    else 
+    else if (alusrc == 1'b0)
         alu_src_b = regfile_d2;
-
-    if (!resultsrc)
-        result = readdata;
+    //else if (alusrc == 2'b10)
+        //alu_src_b = PCplus4;
     else
-        result = aluresult;
+        alu_src_b = 'b1111111;
 
-    if (RegSrc) Regdatain = immext;
-    else Regdatain = result;
-    
+    if (resultsrc == 2'b00)
+        result = readdata;
+    else if (resultsrc == 2'b01)
+        result = aluresult;
+    else if (resultsrc == 2'b10)
+        result = PCplus4; //JAL/JALR return storage
+    else if (resultsrc == 2'b11)
+        result = immext;
+    else
+        result = 'b1111111;//Shouldn't happen
+
 end;
 
 /* verilator lint_off PINMISSING */
@@ -85,13 +88,14 @@ programcounter #() programcounter (
     .clk(clk_i),
     .PCsrc(pcsrc),
     .rst(rst_i),
-    .pc(pc)
+    .pc(pc),
+    .pcplus4(PCplus4),
+    .ALUresult (aluresult)
 );
 /* verilator lint_on PINMISSING */
 
 
 instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
-    .clk_i(clk_i),
     .addr_i(pc),
     .dout_o(instr)
 );
@@ -110,7 +114,7 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .a1(instr[19:15]),
     .a2(instr[24:20]),
     .a3(instr[11:7]),
-    .wd3(Regdatain),
+    .wd3(result),
     .rd1(alu_src_a),
     .rd2(regfile_d2),
     .a0(a0)
@@ -120,7 +124,7 @@ datamemory #() datamemory(
     .address(aluresult),
     .write_data(regfile_d2),
     .write_enable(memwrite),
-    .DATAMEMControl(DATAMEMControl),
+    .DATAMEMControl(instr_funct3),
     .clk(clk_i),
     .read_data(readdata)
 );
@@ -134,10 +138,8 @@ controlUnit #() controlunit(
     .ResultSrc(resultsrc),
     .RegWrite(regwrite),
     .ALUControl(alu_ctrl),
-    .DATAMEMControl(DATAMEMControl),
     .ALUSrc(alusrc),
     .ImmSrc(immsrc),
-    .RegSrc(RegSrc),
     .MemWrite(memwrite)
 );
 

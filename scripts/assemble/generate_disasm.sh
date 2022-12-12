@@ -13,7 +13,7 @@ do
         instr=${BASH_REMATCH[3]}
         addr=${BASH_REMATCH}
         tout="${hex} ${instr}"
-        tout=`echo $tout | tr -t \' \'`
+        tout=`echo $tout | tr -ds \' \'`
         out+="$tout"
         out+=$'\n'
     fi

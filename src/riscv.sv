@@ -39,7 +39,7 @@ logic [BITNESS-1:0] aluresult;
 
 logic alu_eq;
 
-wire  pcsrc;
+wire [1:0] pcsrc;
 
 logic [1:0] resultsrc;
 

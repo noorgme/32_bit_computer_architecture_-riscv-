@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-relpath=$(find ./test/samples/ -iname *$1*)
+relpath=$(find ./test/samples/ -iname $1.riscv.s)
  
 if [[ ! -f "$relpath" ]]
 then

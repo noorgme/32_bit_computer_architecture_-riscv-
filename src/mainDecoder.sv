@@ -17,7 +17,7 @@ module mainDecoder (
             7'b0110011 : begin //R-type
                         ALUOp = 2'b10;
                         ALUSrc = 1'b0;
-                        ResultSrc = 2'b00;
+                        ResultSrc = 2'b01;
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b000; //xx
@@ -35,7 +35,7 @@ module mainDecoder (
             7'b0010011 : begin //I-type
                         ALUOp =  2'b00;
                         ALUSrc =  1'b1;
-                        ResultSrc = 2'b11; //lb
+                        ResultSrc = 2'b01; //lb
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b000;
@@ -44,7 +44,7 @@ module mainDecoder (
             7'b0000011 : begin //I-type
                         ALUOp =  2'b00;
                         ALUSrc =  1'b1;
-                        ResultSrc = 2'b00; //lb
+                        ResultSrc = 2'b01; //lb
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b000;
@@ -71,7 +71,7 @@ module mainDecoder (
             7'b0110111 : begin //lui
                         ALUOp =  2'b00;
                         ALUSrc =  1'b0;
-                        ResultSrc = 2'b01;
+                        ResultSrc = 2'b11;
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b011;

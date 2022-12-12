@@ -7,7 +7,7 @@ module alu #(
     output logic zero
 );
 
-    typedef enum [CONTROLL_WIDTH-1:0]{ADD=0,SUB=1,AND=2,OR=3,SLT=5, BGEU=6} alumodes;
+    typedef enum [CONTROLL_WIDTH-1:0]{ADD=0,SUB=1,AND=2,OR=3,SLT=5, BGE=6} alumodes;
     int signed op1sin = op1, op2sin = op2;
 
     always_comb begin

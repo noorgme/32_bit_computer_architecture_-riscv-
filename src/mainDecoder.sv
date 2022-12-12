@@ -74,7 +74,7 @@ module mainDecoder (
                         ResultSrc = 2'b11;
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
-                        ImmSrc = 3'b011;
+                        ImmSrc = 3'b100;
                         Branch = 2'b00;               
                         end
             7'b1100111 : begin //JALR

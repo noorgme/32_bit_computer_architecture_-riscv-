@@ -1,0 +1,10 @@
+li a0, 0x60
+jal x0, shouldreach
+
+shouldntreach:
+li a0, 0xABADB01
+jal x0, shouldntreach
+
+shouldreach:
+li a0, 0x600DB01
+jal x0, shouldreach

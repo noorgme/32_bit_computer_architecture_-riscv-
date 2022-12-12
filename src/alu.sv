@@ -33,8 +33,8 @@ module alu #(
             OR:     if(op1sin < op2sin) zero = 1;
             SLT:    if(op1 < op2) zero = 1;
             SLL:    zero = 0;
-            SLR:    zero = 0;
-
+            SRL:    zero = 0;
+            SRA:    zero = 0;
             default: zero = 0;
         endcase
     end

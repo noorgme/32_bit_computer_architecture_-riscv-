@@ -100,7 +100,7 @@ instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructi
     .dout_o(instr)
 );
 
-alu #(BITNESS,3) alu (
+alu #(BITNESS,4) alu (
     .op1(alu_src_a),
     .op2(alu_src_b),
     .ctrl(alu_ctrl),

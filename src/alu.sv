@@ -32,7 +32,7 @@ module alu #(
             SUB:    if(op1sin >= op2sin) zero = 1;
             AND:    if(op1 >= op2) zero = 1;
             OR:     if(op1sin < op2sin) zero = 1;
-            XOR:    if(op1sin < op2sin) zero = 1;
+            XOR:    zero = 0;
             SLT:    if(op1 < op2) zero = 1;
             SLL:    zero = 0;
             SRL:    zero = 0;

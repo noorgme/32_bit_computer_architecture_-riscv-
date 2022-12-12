@@ -20,11 +20,7 @@ logic [INSTR_WIDTH-1:0] instr;
 
 logic regwrite;
 
-logic RegSrc;
-
-logic [BITNESS-1:0] Regdatain;
-
-logic [1:0] alusrc;
+logic alusrc;
 
 logic [2:0] immsrc;
 
@@ -45,7 +41,7 @@ logic alu_eq;
 
 wire [1:0] pcsrc;
 
-logic resultsrc;
+logic [1:0] resultsrc;
 
 logic memwrite;
 
@@ -65,23 +61,26 @@ wire [BITNESS-1:0] PCplus4;
 always_comb begin
     data_out_o = a0[7:0];
 
-    if (alusrc == 2'b01)
+    if (alusrc == 1'b1)
         alu_src_b = immext;
-    else if (alusrc == 2'b00)
+    else if (alusrc == 1'b0)
         alu_src_b = regfile_d2;
-    else if (alusrc == 2'b10)
-        alu_src_b = PCplus4;
+    //else if (alusrc == 2'b10)
+        //alu_src_b = PCplus4;
     else
         alu_src_b = 'b1111111;
 
-    if (!resultsrc)
+    if (resultsrc == 2'b00)
         result = readdata;
-    else
+    else if (resultsrc == 2'b01)
         result = aluresult;
+    else if (resultsrc == 2'b10)
+        result = PCplus4; //JAL/JALR return storage
+    else if (resultsrc == 2'b11)
+        result = immext;
+    else
+        result = 'b1111111;//Shouldn't happen
 
-    if (RegSrc) Regdatain = immext;
-    else Regdatain = result;
-    
 end;
 
 /* verilator lint_off PINMISSING */
@@ -92,7 +91,8 @@ programcounter #() programcounter (
     .PCsrc(pcsrc),
     .rst(rst_i),
     .pc(pc),
-    .pcplus4(PCplus4)
+    .pcplus4(PCplus4),
+    .ALUresult (aluresult)
 );
 /* verilator lint_on PINMISSING */
 
@@ -117,7 +117,7 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .a1(instr[19:15]),
     .a2(instr[24:20]),
     .a3(instr[11:7]),
-    .wd3(Regdatain),
+    .wd3(result),
     .rd1(alu_src_a),
     .rd2(regfile_d2),
     .a0(a0)
@@ -144,7 +144,6 @@ controlUnit #() controlunit(
     .DATAMEMControl(DATAMEMControl),
     .ALUSrc(alusrc),
     .ImmSrc(immsrc),
-    .RegSrc(RegSrc),
     .MemWrite(memwrite)
 );
 

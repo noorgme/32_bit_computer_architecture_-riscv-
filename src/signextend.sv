@@ -2,7 +2,7 @@ module signextend (
     /* verilator lint_off UNUSED */
     input logic     [31:7]      toextend_i,
     /* verilator lint_on UNUSED */
-    input logic     [1:0]       immsrc_i,
+    input logic     [2:0]       immsrc_i,
     output logic    [31:0]      immop_o
 );
 

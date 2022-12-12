@@ -6,13 +6,12 @@ module controlUnit (
     input logic funct7_5,
 //Outputs
     output logic [1:0] PCSrc, //Select PC:=PC+4 (Sel0) or PC:=PC+ImmOp (Sel1) or PC:=ImmOp (Sel2)
-    output logic ResultSrc,
+    output logic [1:0] ResultSrc,
     output logic MemWrite,
     output logic [3:0] ALUControl,
-    output logic [1:0] ALUSrc,
-    output logic [1:0] ImmSrc,
+    output logic         ALUSrc,
+    output logic [2:0] ImmSrc,
     output logic RegWrite,
-    output logic RegSrc,
     output logic [2:0] DATAMEMControl
 );
 wire [1:0] BranchWire;
@@ -24,6 +23,8 @@ always_comb
         assign PCSrc = 2'b01;
     else if (BranchWire == 2'b10)
         assign PCSrc = 2'b10;
+    else if (BranchWire == 2'b11)
+        assign PCSrc = 2'b11;
     else
         assign PCSrc = 2'b00;
     end
@@ -38,7 +39,6 @@ mainDecoder mainDecoder(
     .ALUSrc (ALUSrc),
     .ResultSrc (ResultSrc),
     .RegWrite (RegWrite),
-    .RegSrc (RegSrc),
     .MemWrite (MemWrite),
     .ALUOp (ALUOpWire)
 

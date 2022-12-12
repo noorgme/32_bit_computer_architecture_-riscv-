@@ -1,0 +1,14 @@
+00000000 <.data>:
+00400593 addi a1,zero,4
+00158593 addi a1,a1,1
+00a59663 bne a1,a0,0x14
+0ba00513 addi a0,zero,186
+ffdff06f jal zero,0xc
+06000513 addi a0,zero,96
+00500613 addi a2,zero,5
+00c61663 bne a2,a2,0x28
+0b200513 addi a0,zero,178
+ffdff06f jal zero,0x20
+0ac00513 addi a0,zero,172
+ffdff06f jal zero,0x28
+

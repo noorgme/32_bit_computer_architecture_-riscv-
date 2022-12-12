@@ -20,4 +20,5 @@ hexfile: $(S_HEX_FILES)
 	riscv64-unknown-elf-objcopy -O binary -j .text "$?.out.reloc" "$?.bin"
 	rm "$?.out.reloc"
 	./format_hex.sh "$?"
+	./generate_disasm.sh
 	rm "$?.bin"

@@ -41,16 +41,16 @@ module mainDecoder (
                         ImmSrc = 3'b000;
                         Branch = 2'b00;                               
                         end
-            7'b0000011 : begin //I-type
+            7'b0000011 : begin //load instructions
                         ALUOp =  2'b00;
                         ALUSrc =  1'b1;
-                        ResultSrc = 2'b01; //lb
+                        ResultSrc = 2'b00;
                         RegWrite = 1'b1;
                         MemWrite = 1'b0;
                         ImmSrc = 3'b000;
                         Branch = 2'b00;                               
                         end
-            7'b0100011 : begin //S-type
+            7'b0100011 : begin //Store instructions
                         ALUOp =  2'b00;
                         ALUSrc =  1'b1;
                         ResultSrc = 2'b00; //x

@@ -24,4 +24,12 @@ jal x0, shouldntreachagain # 10
 shouldreachagain:
 #li a0, 0XF00DBEEF
 addi a0, x0, 0xAC # 11
-jal a0, shouldreachagain # 12
+jal a0, reachfuther # 12
+li a0, 0xB00B1E5 #13-14
+jal end #15
+
+reachfuther:
+jalr a0,a0,0 #16
+
+end:
+    jal end #17

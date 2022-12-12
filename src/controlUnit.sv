@@ -17,12 +17,10 @@ wire [1:0] BranchWire;
 wire [1:0] ALUOpWire;
 always_comb
     begin
-    if ((BranchWire==2'b01) && (zero==1'b1))
+    if (((BranchWire==2'b01) && (zero==1'b1))||(BranchWire == 2'b10))
         assign PCSrc = 2'b01;
-    else if (BranchWire == 2'b10)
-        assign PCSrc = 2'b10;
     else if (BranchWire == 2'b11)
-        assign PCSrc = 2'b11;
+        assign PCSrc = 2'b10;
     else
         assign PCSrc = 2'b00;
     end

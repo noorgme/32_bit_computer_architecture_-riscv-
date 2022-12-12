@@ -12,7 +12,7 @@ module controlUnit (
     output logic ALUSrc,
     output logic [2:0] ImmSrc,
     output logic RegWrite,
-    output logic RegSrc,
+    output logic RegSrc
 );
 wire [1:0] BranchWire;
 wire [1:0] ALUOpWire;

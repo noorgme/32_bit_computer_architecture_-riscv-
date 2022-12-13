@@ -1,6 +1,6 @@
 module datamemory #(
     parameter   DATA_WIDTH = 32, 
-                ADDRESS_WIDTH = 32,
+                ADDRESS_WIDTH = 30,
                 MEMORY_SIZE = 16
 )(
     input logic     [ADDRESS_WIDTH-1:0] address,
@@ -12,10 +12,13 @@ module datamemory #(
 
     logic [DATA_WIDTH-1:0] data_mem [2**MEMORY_SIZE-1:0];
 
+    always_comb read_data = data_mem[{address}[MEMORY_SIZE-1:0]];
+
+
     always_ff @(posedge clk)
         begin
             if (write_enable == 1'b1) 
-                data_mem[{address}[MEMORY_SIZE+1:2]] <= d_in;
+                data_mem[{address}[MEMORY_SIZE-1:0]] <= write_data;
         end
 
 endmodule

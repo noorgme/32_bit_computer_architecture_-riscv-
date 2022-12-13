@@ -134,9 +134,9 @@ int main(int argc, char **argv, char **env) {
             assert_message(top->zero == (tmpi>=tmpj), "the aluout=%d, should have been %d, mode %d, i = %d, j =%d", top->zero,tmpi>=tmpj,top->ctrl,tmpi,tmpj);
             //srl
             top->ctrl = 7;
-            top->op1 = i;
+            top->op1 = i*pow(2,len-run);
             top->op2 = j;
-            ltmpi = i;
+            ltmpi = i*pow(2,len-run);
             sum = ltmpi>>ltmpj;
             if (j>32) sum = 0;
             time = time + 2;

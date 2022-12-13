@@ -19,7 +19,7 @@ always_comb begin
         {2'b10, 3'b110, 2'b?}, {2'b00, 3'b110, 2'b?}, {2'b01, 3'b100, 2'b?}  :  ALUControl = 3'b011; //or, ori, blt
         {2'b10, 3'b100, 2'b?}, {2'b00, 3'b100, 2'b?} :                          ALUControl = 3'b100; //xor, xori
         {2'b10, 3'b101, 2'b?}, {2'b00, 3'b101, 2'b00} :                         ALUControl = 3'b111; //shift right logical
-        {2'b11, 3'b?, 2'b?} :                                                   ALUControl = 3'b000; //JALR!
+        {2'b11, 3'b?, 2'b?} :                                                   ALUControl = 3'b000; //JALR!,LW,SW
         default : ALUControl = 3'b000;
     endcase
 end 

@@ -4,7 +4,7 @@
 
 #include "lib/testutils.h"
 
-#define MAX_SIM_CYC 1000000
+#define MAX_SIM_CYC 100
 
 int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);

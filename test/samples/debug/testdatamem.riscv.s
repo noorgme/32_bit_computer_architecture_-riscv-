@@ -1,9 +1,9 @@
-addi a0, zero, 0xAB
+addi t1, zero, 0xAB
 addi t2, zero, 0xCD 
 addi t3, zero, 0xEF 
 addi t4, zero, 0x89 
 add s0, zero, 0x20 
-sb a0, 3(s0)
+sb t1, 3(s0)
 sb t2, 2(s0)
 sb t3, 1(s0)
 sb t4, 0(s0)

@@ -31,7 +31,7 @@ module alu #(
             ADD:    if(op1 == op2) zero = 1;//be1
             SUB:    if(op1sin != op2sin) zero = 1;//bne
             AND:    if(op1 >= op2) zero = 1;//bgeu
-            SLL:    if(op1sin>=op2sin) zero = 1;/bge
+            SLL:    if(op1sin>=op2sin) zero = 1;//bge
             OR:     if(op1sin < op2sin) zero = 1;//blt
             SLT:    if(op1 < op2) zero = 1;//bltu
             default: zero = 0;

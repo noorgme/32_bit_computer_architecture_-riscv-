@@ -42,7 +42,7 @@ module mainDecoder (
                         Branch = 2'b00;                               
                         end
             7'b0000011 : begin //load instructions
-                        ALUOp =  2'b00;
+                        ALUOp =  2'b11;
                         ALUSrc =  1'b1;
                         ResultSrc = 2'b00;
                         RegWrite = 1'b1;
@@ -51,7 +51,7 @@ module mainDecoder (
                         Branch = 2'b00;                               
                         end
             7'b0100011 : begin //Store instructions
-                        ALUOp =  2'b00;
+                        ALUOp =  2'b11;
                         ALUSrc =  1'b1;
                         ResultSrc = 2'b00; //x
                         RegWrite = 1'b0;

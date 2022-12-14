@@ -17,7 +17,6 @@ int main (int argc, char **argv, char **env) {
     top->address = 0;
     top->write_data = 2882400152;
     top->write_enable = 1;
-    top->DATAMEMControl = 0;
     int count = 0;
     int clk;
     int i;
@@ -28,7 +27,6 @@ int main (int argc, char **argv, char **env) {
             top->clk = !top->clk;
             top->eval();
         }
-        top->DATAMEMControl = i/100;
         top->address = count;
         top->write_enable = (i/150)<130 && i%3 == 1;
         if(i%6==0){ 

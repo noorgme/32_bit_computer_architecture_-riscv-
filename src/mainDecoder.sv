@@ -60,7 +60,7 @@ module mainDecoder (
                         Branch = 2'b00;               
                         end
             7'b1101111 : begin //JAL
-                        ALUOp =  2'b11;
+                        ALUOp =  2'b00; //dont care 
                         ALUSrc = 1'b1;
                         ResultSrc = 2'b10;
                         RegWrite = 1'b1; //To store Return address into rd (PC+4)
@@ -78,7 +78,7 @@ module mainDecoder (
                         Branch = 2'b00;               
                         end
             7'b1100111 : begin //JALR
-                        ALUOp =  2'b00;
+                        ALUOp =  2'b11; //set to get ALU to ADD (PC+RS1+IMMOP)
                         ALUSrc = 1'b1;
                         ResultSrc = 2'b10;
                         RegWrite = 1'b1; 

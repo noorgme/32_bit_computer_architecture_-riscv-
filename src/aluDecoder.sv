@@ -20,7 +20,7 @@ always_comb begin
         {2'b10, 3'b100, 2'b?}, {2'b00, 3'b100, 2'b?} :                          ALUControl = 4'b0100; //xor, xori = 4
         {2'b10, 3'b101, 2'b?0}, {2'b00, 3'b101, 2'b00} :                        ALUControl = 4'b0111; //srl = 7
         {2'b10, 3'b101, 2'b?1} :                                                ALUControl = 4'b1000; //sra = 8
-        {2'b11, 3'b?, 2'b?} :                                                   ALUControl = 4'b0000; //JALR! = 0
+        {2'b11, 3'b?, 2'b?} :                                                   ALUControl = 4'b0000; //JALR! = 0, LW, SW
         
         default : ALUControl = 4'b000;
     endcase

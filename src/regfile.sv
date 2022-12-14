@@ -19,7 +19,7 @@ module regfile #(
     end
 
     always_ff @(posedge clk) begin
-        if (we3) ram_array[a3] <= wd3;
+        if (we3 && (a3 != 'b0)) ram_array[a3] <= wd3;
     end
     
 endmodule

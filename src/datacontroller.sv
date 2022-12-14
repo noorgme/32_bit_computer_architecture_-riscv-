@@ -6,31 +6,29 @@ module datacontroller #(
     input logic [1:0] First_2,
     output logic [DATA_WIDTH-1:0] write_data, read_data
 );
+/* verilator lint_off UNUSED */
 
-    logic [DATA_WIDTH-1:0]    tmp_intop,tmp_inbottom;
-    logic [4:0]    shiftb = {2'b11 & First_2,3'b0},shifth = {1'b1 & First_2[1],4'b0};
+    logic [4:0]    shiftb = {First_2,3'b0},shifth = {First_2[1],4'b0};
     logic [7:0]    tmpb_out;
     logic [15:0]   tmph_out;
+    logic [DATA_WIDTH-1:0] tmp_data;
 
     always_comb begin
         tmpb_out = {mem_data_out >> shiftb}[7:0];
         tmph_out = {mem_data_out >> shifth}[15:0];
         write_data = 32'b0;
         read_data = 32'b0;
-        tmp_inbottom =32'b0;
-        tmp_intop =32'b0;
+        tmp_data = 0;
         case(DATAMEMControl)
             {3'b000}:begin
-                tmp_intop = {mem_data_out >> (shiftb+8)}[31:0];
-                tmp_inbottom = {mem_data_out << (32-shiftb)}[31:0];
                 read_data = {{24{tmpb_out[7]}}, tmpb_out}; //lb
-                write_data = {{tmp_intop,mem_data_in[7:0],tmp_inbottom}>>(32-shiftb)}[31:0]; //sb
+                tmp_data = {{{mem_data_out>>shiftb|mem_data_out<<(DATA_WIDTH-shiftb)}[DATA_WIDTH-1:8],mem_data_in[7:0]}}[DATA_WIDTH-1:0];
+                write_data = tmp_data<<shiftb|tmp_data>>(DATA_WIDTH-shiftb); //sb
             end
             {3'b001}: begin
-                tmp_intop = {mem_data_out >> (shiftb+16)}[31:0];
-                tmp_inbottom = {mem_data_out << (32-shiftb)}[31:0];
                 read_data = {{16{tmph_out[15]}},tmph_out}; //lh
-                write_data = {{tmp_intop,mem_data_in[15:0],tmp_inbottom}>>(32-shifth)}[31:0]; //sh
+                tmp_data = {{{mem_data_out>>shifth|mem_data_out<<(DATA_WIDTH-shifth)}[DATA_WIDTH-1:16],mem_data_in[15:0]}}[DATA_WIDTH-1:0];
+                write_data = tmp_data<<shifth|tmp_data>>(DATA_WIDTH-shifth); //sh
             end
             {3'b010}: begin
                 read_data = mem_data_out; //lw

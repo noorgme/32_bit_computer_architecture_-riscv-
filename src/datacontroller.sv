@@ -6,7 +6,6 @@ module datacontroller #(
     input logic [1:0] First_2,
     output logic [DATA_WIDTH-1:0] write_data, read_data
 );
-/* verilator lint_off UNUSED */
 
     logic [4:0]    shiftb = {First_2,3'b0},shifth = {First_2[1],4'b0};
     logic [7:0]    tmpb_out;

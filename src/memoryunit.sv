@@ -1,5 +1,5 @@
 module memoryunit #(
-    parameter   DATA_WIDTH = 32, ADDRESS_WIDTH = 32, MEMORY_SIZE = 14
+    parameter   DATA_WIDTH = 32, ADDRESS_WIDTH = 32, MEMORY_SIZE = 14, SOURCE_FILE = "datamemory.mem"
 ) (
     input logic     [ADDRESS_WIDTH-1:0] address,
     input logic     [DATA_WIDTH-1:0]    write_data,
@@ -11,7 +11,7 @@ module memoryunit #(
 
 logic [DATA_WIDTH-1:0] mem_in,mem_out;
 
-datamemory #(DATA_WIDTH,ADDRESS_WIDTH-2,MEMORY_SIZE) datamemory1(
+datamemory #(DATA_WIDTH,ADDRESS_WIDTH-2,MEMORY_SIZE,SOURCE_FILE) datamemory1(
     .address(address[ADDRESS_WIDTH-1:2]),
     .write_data(mem_in),
     .write_enable(write_enable),

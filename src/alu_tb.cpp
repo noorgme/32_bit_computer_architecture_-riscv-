@@ -145,10 +145,15 @@ int main(int argc, char **argv, char **env) {
             assert_message(top->aluout == sum, "the aluout=%d, should have been %ld, mode %d, i=%d, j=%d", top->aluout,sum,top->ctrl,i,j);
             //sra
             top->ctrl = 8;
+            top->op1 = i*pow(2,len-run);
+            top->op2 = j;
+            ltmpi = i*pow(2,len-run);
+            sum = ltmpi>>ltmpj;
+            if (j>32) sum = 0;
             time = time + 2;
             top->eval();
             tfp->dump(time);
-            //assert_message(top->aluout == (top->op1 >> top->op2), "the aluout=%d, should have been %d, mode %d, i=%d, j=%d", top->aluout,i>>j,top->ctrl,i,j);
+            assert_message(top->aluout == (sum), "the aluout=%d, should have been %d, mode %d, i=%d, j=%d", top->aluout,i>>j,top->ctrl,i,j);
         }
     }
     // tfp->close(); 

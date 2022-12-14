@@ -1,4 +1,7 @@
-#!/bin/bash -e
+#!/bin/bash
+
+
+errors=""
 
 for asmfile in $(find ./test/testcases -name '*.s')
 do
@@ -15,8 +18,18 @@ do
         echo
         else
         echo "Assembly testcase $asmfile failed, register state differences at end:"
+        errors="${errors}Assembly testcase $asmfile failed!\n"
         diff -Naur $memfile ./src/generated/registerdump.tmp.mem
         fi
          
     fi
 done
+
+if [ ! -z "$errors" ]
+then
+    echo ""
+    echo "##### Errors encountered when testing assembly execution: #####"
+    echo -e "$errors"
+else
+    echo -e "\nNo errors encountered testing assembly execution."
+fi

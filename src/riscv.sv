@@ -120,7 +120,7 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .a0(a0)
 );
 
-datamemory #() datamemory(
+memoryunit #() memoryunit(
     .address(aluresult),
     .write_data(regfile_d2),
     .write_enable(memwrite),

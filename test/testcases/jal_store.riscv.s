@@ -12,4 +12,4 @@ alivespiral:
 jal a1, alivespiral
 # if alivespiral is at pc=0x28, a1 should be set to pc address of unreachablespiral, i.e. 0x2c
 unreachablespiral:
-jal x0, unreachablespiral
+jal x4, unreachablespiral

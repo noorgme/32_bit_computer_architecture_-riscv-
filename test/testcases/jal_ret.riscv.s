@@ -6,7 +6,7 @@ call func
 shouldreach:
 li a0, 0x600DB01
 alivespiral:
-jal x0, alivespiral
+jal a7, alivespiral
 
 func:
 li a0, 0xca11ed
@@ -17,4 +17,4 @@ ret
 shouldntreach:
 li a0, 0xDABADB01
 deathspiral:
-jal x0, deathspiral
+jal a7, deathspiral

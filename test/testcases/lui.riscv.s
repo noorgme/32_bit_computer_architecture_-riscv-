@@ -1,0 +1,6 @@
+li a0, 0xdeadbeef
+li a1, 0xb00ad0be
+li a2, 0xad105
+li a3, 0x600da10e
+li a4, 0x5addecaf
+li a5, 0x51ccd00d

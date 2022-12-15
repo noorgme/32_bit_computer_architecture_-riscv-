@@ -149,5 +149,11 @@ signextend #() signextend(
     .immop_o(immext)
 );
 
+final begin
+    $display("Writing register dump...");
+    $writememh("./src/generated/registerdump.tmp.mem", registerfile.ram_array);
+    $display("Done writing register dump");
+end;
+
 
 endmodule

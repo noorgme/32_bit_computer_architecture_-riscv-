@@ -1,39 +1,42 @@
 module datacontroller #(
     parameter   DATA_WIDTH = 32
 ) (
-    input logic [DATA_WIDTH-1:0] mem_data_in, 
-    input logic [3:0][DATA_WIDTH/4-1:0] mem_data_out, 
-    input logic [2:0] DATAMEMControl,
-    input logic [1:0] First_2,
-    output logic [3:0][DATA_WIDTH/4-1:0] write_data,
-    output logic [DATA_WIDTH-1:0] read_data
+    input logic [DATA_WIDTH-1:0] memDataIn_i, 
+    input logic [3:0][DATA_WIDTH/4-1:0] memDataOut_i, 
+    input logic [2:0] dataMemControl_i,
+    input logic [1:0] first_2_i,
+    output logic [3:0][DATA_WIDTH/4-1:0] writeData_o,
+    output logic [DATA_WIDTH-1:0] readData_o
 );
 
     always_comb begin
-        write_data = 0;
-        read_data = 0;
-        case(DATAMEMControl)
-            {3'b000}:begin
-                read_data = {{24{mem_data_out[First_2][7]}},mem_data_out[First_2]}; //lb
-                write_data = mem_data_out; 
-                write_data[First_2] =mem_data_in[7:0]; //sb
+        writeData_o = 0;
+        readData_o = 0;
+        case(dataMemControl_i)
+            {3'b000}:
+            begin
+                readData_o = {{24{memDataOut_i[first_2_i][7]}},memDataOut_i[first_2_i]}; //lb
+                writeData_o = memDataOut_i; 
+                writeData_o[first_2_i] = memDataIn_i[7:0]; //sb
             end
-            {3'b001}: begin
-                read_data = {{16{mem_data_out[{First_2[1],1'b0}+:2][15]}},mem_data_out[{First_2[1],1'b0}+:2]}; //lh
-                write_data = mem_data_out;
-                write_data[{First_2[1],1'b0}+:2]=mem_data_in[15:0]; //sh
+            {3'b001}: 
+            begin
+                readData_o = {{16{memDataOut_i[{first_2_i[1],1'b0}+:2][15]}},memDataOut_i[{first_2_i[1],1'b0}+:2]}; //lh
+                writeData_o = memDataOut_i;
+                writeData_o[{first_2_i[1],1'b0}+:2] = memDataIn_i[15:0]; //sh
             end
-            {3'b010}: begin
-                read_data = mem_data_out; //lw
-                write_data =mem_data_in; //sw
+            {3'b010}: 
+            begin
+                readData_o = memDataOut_i; //lw
+                writeData_o = memDataIn_i; //sw
             end
-            {3'b100}: read_data = {{24{1'b0}},mem_data_out[First_2]}; //lbu
-            {3'b101}: read_data = {{16{1'b0}},mem_data_out[{First_2[1],1'b0}+:2]}; //lhu
-            default: begin
-                write_data = 0;
-                read_data = 0;
+            {3'b100}: readData_o = {{24{1'b0}},memDataOut_i[first_2_i]}; //lbu
+            {3'b101}: readData_o = {{16{1'b0}},memDataOut_i[{first_2_i[1],1'b0}+:2]}; //lhu
+            default: 
+            begin
+                writeData_o = 0;
+                readData_o = 0;
             end
         endcase
     end
-
 endmodule

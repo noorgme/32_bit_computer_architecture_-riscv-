@@ -1,0 +1,2 @@
+#include <cassert>
+#define assert_message(equality, format, ...) if (!(equality)) {fprintf(stderr, "\n----- Assertion failed: -----\n"); fprintf(stderr, format, __VA_ARGS__); fprintf(stderr, "\n\n"); assert (equality);}

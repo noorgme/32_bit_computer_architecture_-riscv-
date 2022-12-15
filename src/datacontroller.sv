@@ -27,7 +27,7 @@ module datacontroller #(
             end
             {3'b010}: 
             begin
-                reaData_o = memDataOut_i; //lw
+                readData_o = memDataOut_i; //lw
                 writeData_o = memDataIn_i; //sw
             end
             {3'b100}: readData_o = {{24{1'b0}},memDataOut_i[first_2_i]}; //lbu

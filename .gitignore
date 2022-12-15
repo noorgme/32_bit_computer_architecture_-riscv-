@@ -4,4 +4,6 @@ vbuddy.cfg
 **/obj_dir/
 **/.DS_Store
 *.vcd
-*.s.hex
+scripts/assemble/.build/
+src/generated/*.tmp.*
+/disasm_filter.txt

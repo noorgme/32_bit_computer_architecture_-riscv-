@@ -1,7 +1,7 @@
 addi s1, zero, 0x1 #place holder for 1
 addi s8, zero, 0x8 #place holder for 8
+addi a0, zero, 0x0 #starts counter at 0
 main:
-    addi a0, zero, 0x0 #restarts counter
     addi t2, zero, 0x0 #counter for lights
 lights:
     addi t6, zero, 0xF #set delay can be changed

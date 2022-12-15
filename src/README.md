@@ -49,26 +49,6 @@ Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs 
 
 Dec 6: Test data & results for datamemory, test data updated to include write & read test:
 
-|RAM Location|DataStored|DataRead (next cycle)|
-| --- | --- | --- |
-|1|1CB|1CB|
-|2|1CA|1CA|
-|...|...|...|
-|12|1BA|1BA|
-|13|1B9|1B9|
-
-We then continue to read this again with write enable = 1, and if the output from memory is still the value before it is changed, then the datamemory component is working correctly
-
-|RAM Location|DataRead (next cycle)|
-| --- | --- |
-|1|1CB|
-|2|1CA|
-|...|...|
-|12|1BA|
-|13|1B9|
-
-Here, we can see that everything is working as expected & `datamemory.sv` is correct
-
 #### Ollie Cosgrove:
 
 Dec 7: Changed `datamemory.sv` slightly so the first to bits are ignored and the size of the memory can be set with a parameter as it is not possible to have a data memory of 4Gb.

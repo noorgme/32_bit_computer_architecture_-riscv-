@@ -9,20 +9,20 @@ module riscv #(
     input logic int_i,
     /* verilator lint_on UNUSED */
     input logic clk_i,
-    output logic [7:0] data_out_o
+    output logic [7:0] dataOut_o
 );
 
-logic [BITNESS-1:0] alu_src_a, alu_src_b, regfile_d2;
+logic [BITNESS-1:0] aluSrcA, aluSrcB, regFileD2;
 
 logic [BITNESS-1:0] pc;
 
 logic [INSTR_WIDTH-1:0] instr;
 
-logic regwrite;
+logic regWrite;
 
-logic alusrc;
+logic aluSrc;
 
-logic [2:0] immsrc;
+logic [2:0] immSrc;
 
 logic [BITNESS-1:0] result;
 
@@ -31,127 +31,129 @@ logic [BITNESS-1:0] result;
 logic [BITNESS-1:0] a0;
 /* verilator lint_on UNUSED */
 
-logic [BITNESS-1:0] immext;
+logic [BITNESS-1:0] immExt;
 
-logic [3:0] alu_ctrl;
+logic [3:0] aluCtrl;
 
-logic [BITNESS-1:0] aluresult;
+logic [BITNESS-1:0] aluResult;
 
-logic alu_eq;
+logic aluEq;
 
-wire [1:0] pcsrc;
+wire [1:0] pcSrc;
 
-logic [1:0] resultsrc;
+logic [1:0] resultSrc;
 
-logic memwrite;
+logic memWrite;
 
-logic [BITNESS-1:0] readdata;
+logic [BITNESS-1:0] readData;
 
-wire  instr_funct7_5  = instr[30];
+wire  instrFunct7_5  = instr[30];
 
-wire [2:0] instr_funct3  = instr[14:12];
+wire [2:0] instrFunct3  = instr[14:12];
 
-wire [6:0] instr_op = instr[6:0];
+wire [6:0] instrOp = instr[6:0];
 
-wire [BITNESS-1:0] PCplus4;
+wire [BITNESS-1:0] pcPlus4;
 
 
-always_comb begin
-    data_out_o = a0[7:0];
+always_comb 
+begin
+    dataOut_o = a0[7:0];
 
-    if (alusrc == 1'b1)
-        alu_src_b = immext;
-    else if (alusrc == 1'b0)
-        alu_src_b = regfile_d2;
+    if (aluSrc == 1'b1)
+        aluSrcB = immExt;
+    else if (aluSrc == 1'b0)
+        aluSrcB = regFileD2;
     //else if (alusrc == 2'b10)
         //alu_src_b = PCplus4;
     else
-        alu_src_b = 'b1111111;
+        aluSrcB = 'b1111111;
 
-    if (resultsrc == 2'b00)
-        result = readdata;
-    else if (resultsrc == 2'b01)
-        result = aluresult;
-    else if (resultsrc == 2'b10)
-        result = PCplus4; //JAL/JALR return storage
-    else if (resultsrc == 2'b11)
-        result = immext;
+    if (resultSrc == 2'b00)
+        result = readData;
+    else if (resultSrc == 2'b01)
+        result = aluResult;
+    else if (resultSrc == 2'b10)
+        result = pcPlus4; //JAL/JALR return storage
+    else if (resultSrc == 2'b11)
+        result = immExt;
     else
-        result = 'b1111111;//Shouldn't happen
-
+        result = 'b1111111; //Shouldn't happen
 end;
 
 /* verilator lint_off PINMISSING */
 // need this for unused count pin
+
 programcounter #() programcounter (
-    .ImmOp(immext),
-    .clk(clk_i),
-    .PCsrc(pcsrc),
-    .rst(rst_i),
-    .pc(pc),
-    .pcplus4(PCplus4),
-    .ALUresult (aluresult)
+    .immOp_i(immExt),
+    .clk_i(clk_i),
+    .pcSrc_i(pcSrc),
+    .rst_i(rst_i),
+    .pc_o(pc),
+    .pcPlus4_o(pcPlus4),
+    .aluResult_i (aluResult)
 );
 /* verilator lint_on PINMISSING */
 
 
 instructionmemory #(BITNESS, INSTR_WIDTH, "instructionmemory.tmp.mem") instructionmemory (
     .addr_i(pc),
-    .dout_o(instr)
+    .data_o(instr)
 );
 
 alu #(BITNESS,4) alu (
-    .op1(alu_src_a),
-    .op2(alu_src_b),
-    .ctrl(alu_ctrl),
-    .aluout(aluresult),
-    .zero(alu_eq)
+    .op1_i(aluSrcA),
+    .op2_i(aluSrcB),
+    .ctrl_i(aluCtrl),
+    .alu_o(aluResult),
+    .zero_o(aluEq)
 );
 
 regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
-    .clk(clk_i),
-    .we3(regwrite),
-    .a1(instr[19:15]),
-    .a2(instr[24:20]),
-    .a3(instr[11:7]),
-    .wd3(result),
-    .rd1(alu_src_a),
-    .rd2(regfile_d2),
-    .a0(a0)
+    .clk_i(clk_i),
+    .we3_i(regWrite),
+    .a1_i(instr[19:15]),
+    .a2_i(instr[24:20]),
+    .a3_i(instr[11:7]),
+    .wd3_i(result),
+    .rd1_o(aluSrcA),
+    .rd2_o(regFileD2),
+    .a0_o(a0)
 );
 
 memoryunit #() memoryunit(
-    .address(aluresult),
-    .write_data(regfile_d2),
-    .write_enable(memwrite),
-    .DATAMEMControl(instr_funct3),
-    .clk(clk_i),
-    .read_data(readdata)
+    .address_i(aluResult),
+    .writeData_i(regFileD2),
+    .writeEnable_i(memWrite),
+    .dataMemControl_i(instrFunct3),
+    .clk_i(clk_i),
+    .readData_o(readData)
 );
 
 controlUnit #() controlunit(
-    .funct3(instr_funct3),
-    .funct7_5(instr_funct7_5),
-    .zero(alu_eq),
-    .op(instr_op),
-    .PCSrc(pcsrc),
-    .ResultSrc(resultsrc),
-    .RegWrite(regwrite),
-    .ALUControl(alu_ctrl),
-    .ALUSrc(alusrc),
-    .ImmSrc(immsrc),
-    .MemWrite(memwrite)
+    .funct3_i(instrFunct3),
+    .funct7_5_i(instrFunct7_5),
+    .zero_i(aluEq),
+    .op_i(instrOp),
+    .pcSrc_o(pcSrc),
+    .resultSrc_o(resultSrc),
+    .regWrite_o(regWrite),
+    .aluControl_o(aluCtrl),
+    .aluSrc_o(aluSrc),
+    .immSrc_o(immSrc),
+    .memWrite_o(memWrite)
 );
 
 signextend #() signextend(
-    .toextend_i(instr[31:7]),
-    .immsrc_i(immsrc),
-    .immop_o(immext)
+    .toExtend_i(instr[31:7]),
+    .immSrc_i(immSrc),
+    .immOp_o(immExt)
 );
 
-final begin
+final 
+begin
     $display("Writing register dump...");
-    $writememh("./src/generated/registerdump.tmp.mem", registerfile.ram_array);
+    $writememh("./src/generated/registerdump.tmp.mem", registerfile.ramArray);
     $display("Done writing register dump");
 end;
 

@@ -1,12 +1,12 @@
 addi s1, zero, 0x1 #place holder for 1
-addi s8, zero, 0x9 #place holder for 9
+addi s8, zero, 0x8 #place holder for 8
 main:
     addi a0, zero, 0x0 #restarts counter
     addi t2, zero, 0x0 #counter for lights
 lights:
     addi t6, zero, 0xF #set delay can be changed
-    jal ra, delay
     jal ra, output
+    jal ra, delay
     beq t2, s8, off
     jal lights
 output:

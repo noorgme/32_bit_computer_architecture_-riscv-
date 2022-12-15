@@ -20,7 +20,7 @@ module datacontroller #(
         readData_o = 32'b0;
         tmpData = 0;
 
-        case(DataMemControl_i)
+        case(dataMemControl_i)
             {3'b000} :
             begin
                 readData_o = {{24{tmpb[7]}}, tmpb}; //lb

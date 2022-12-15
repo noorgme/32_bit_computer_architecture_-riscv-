@@ -14,7 +14,7 @@ module datamemory #(
 
     logic [DATA_WIDTH-1:0] dataMem [2 ** MEMORY_SIZE-1:0];
 
-    always_comb readData_o = dataMem[{address}[MEMORY_SIZE-1:0]];
+    always_comb readData_o = dataMem[{address_i}[MEMORY_SIZE-1:0]];
 
     initial 
     begin

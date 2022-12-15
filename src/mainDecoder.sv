@@ -12,7 +12,7 @@ module mainDecoder (
 ); 
     always_comb 
     begin
-        case (op)
+        case (op_i)
             7'b0110011 : 
             begin //R-type
                         aluOp_o = 2'b10;
@@ -101,7 +101,7 @@ module mainDecoder (
                         regWrite_o = 1'b0; 
                         memWrite_o = 1'b0;
                         immSrc_o = 3'b000; 
-                        branch_0 = 2'b00;               
+                        branch_o = 2'b00;               
             end
         endcase
     end 

@@ -5,27 +5,28 @@ module datamemory #(
                 SOURCE_FILE = "datamemory.mem"
 
 )(
-    input logic     [ADDRESS_WIDTH-1:0] address,
-    input logic     [DATA_WIDTH-1:0]    write_data,
-    input logic                         write_enable,
-    input logic                         clk,
-    output logic    [DATA_WIDTH-1:0]    read_data
+    input logic     [ADDRESS_WIDTH-1:0] address_i,
+    input logic     [DATA_WIDTH-1:0]    writeData_i,
+    input logic                         writeEnable_i,
+    input logic                         clk_i,
+    output logic    [DATA_WIDTH-1:0]    readData_o
 );
 
-    logic [DATA_WIDTH-1:0] data_mem [2**MEMORY_SIZE-1:0];
+    logic [DATA_WIDTH-1:0] dataMem [2 ** MEMORY_SIZE-1:0];
 
-    always_comb read_data = data_mem[{address}[MEMORY_SIZE-1:0]];
+    always_comb readData_o = dataMem[{address}[MEMORY_SIZE-1:0]];
 
-    initial begin
+    initial 
+    begin
         $display("Loading Data Memory...");
-        $readmemh({"./src/generated/",SOURCE_FILE}, data_mem);
+        $readmemh({"./src/generated/",SOURCE_FILE}, dataMem);
         $display("Done loading");
     end;
 
-    always_ff @(posedge clk)
+    always_ff @(posedge clk_i)
         begin
-            if (write_enable == 1'b1) 
-                data_mem[{address}[MEMORY_SIZE-1:0]] <= write_data;
+            if (writeEnable_i == 1'b1) 
+                dataMem[{address_i}[MEMORY_SIZE-1:0]] <= writeData_i;
         end
 
 endmodule

@@ -5,5 +5,5 @@ vbuddy.cfg
 **/.DS_Store
 *.vcd
 scripts/assemble/.build/
-src/generated/*.tmp.*
+rtl/generated/*.tmp.*
 /disasm_filter.txt

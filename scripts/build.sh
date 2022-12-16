@@ -5,14 +5,14 @@ errorlog=""
 function test_module {
     module_name=$1
     echo "::: Testing module ${module_name} :::"
-    rm -f ./src/${module_name}.vcd
+    rm -f ./rtl/${module_name}.vcd
     # run Verilator to translate Verilog into C++, including C++ testbench
     set -x
-    verilator -Wall --cc --trace ./src/${module_name}.sv -I./src --exe ./src/${module_name}_tb.cpp
+    verilator -Wall --cc --trace ./rtl/${module_name}.sv -I./rtl --exe ./rtl/${module_name}_tb.cpp
 
 
     { set +x; } 2>/dev/null
-    if [ ! -e ./src/${module_name}_tb.cpp ]
+    if [ ! -e ./rtl/${module_name}_tb.cpp ]
     then
         echo "::::: Warning: not testing module ${module_name} as no testbench was found :::::"
         echo
@@ -45,7 +45,7 @@ mkdir -p ./obj_dir
 if [ $1 = "all" ];
 then
     # find all .sv files and capture their module name (bit before .sv and after any directory names)
-    for entry in $(find ./src -name '*.sv')
+    for entry in $(find ./rtl -name '*.sv')
     do
         if [[ $entry =~ .*/(.*)\.sv ]];
         then

@@ -1,7 +1,7 @@
 ADDR_WIDTH = 8
 DATA_WIDTH = 32
 
-f = open(f"./src/generated/magic_rom_{ADDR_WIDTH}x{DATA_WIDTH}.mem","w")
+f = open(f"./rtl/generated/magic_rom_{ADDR_WIDTH}x{DATA_WIDTH}.mem","w")
 
 def prng(n):
     """Simple pseudorandom number generator using a linear congruential generator.

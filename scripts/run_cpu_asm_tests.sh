@@ -12,14 +12,14 @@ do
         
 
         ./scripts/assemble_test_riscv.sh $asmfile
-        if cmp -s ./src/generated/registerdump.tmp.mem $memfile 
+        if cmp -s ./rtl/generated/registerdump.tmp.mem $memfile 
         then
         echo "Assembly testcase $asmfile passed!"
         echo
         else
         echo "Assembly testcase $asmfile failed, register state differences at end:"
         errors="${errors}Assembly testcase $asmfile failed!\n"
-        diff -Naur $memfile ./src/generated/registerdump.tmp.mem
+        diff -Naur $memfile ./rtl/generated/registerdump.tmp.mem
         fi
          
     fi

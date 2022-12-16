@@ -18,11 +18,11 @@ cp "$relpath" ./scripts/assemble/.build/source.s
 
 make -C ./scripts/assemble hexfile
 
-if [[ ! -d "./src/generated" ]] 
+if [[ ! -d "./rtl/generated" ]] 
 then
-    mkdir ./src/generated
+    mkdir ./rtl/generated
 fi
 
-cp ./scripts/assemble/.build/source.s.hex ./src/generated/instructionmemory.tmp.mem
+cp ./scripts/assemble/.build/source.s.hex ./rtl/generated/instructionmemory.tmp.mem
 
 ./scripts/build.sh riscv

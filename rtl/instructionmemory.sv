@@ -16,7 +16,7 @@ logic [DATA_WIDTH-1:0] romArray [2**SPACE_WIDTH-1:0];
 
 initial begin
     $display("Loading instruction ROM...");
-    $readmemh({"./src/generated/",SOURCE_FILE}, romArray);
+    $readmemh({"./rtl/generated/",SOURCE_FILE}, romArray);
     $display("Done loading");
 end;
 

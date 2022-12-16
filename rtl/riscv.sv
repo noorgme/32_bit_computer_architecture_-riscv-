@@ -118,7 +118,8 @@ regfile #(BITNESS, REG_ADDR_WIDTH) registerfile(
     .wd3_i(result),
     .rd1_o(aluSrcA),
     .rd2_o(regFileD2),
-    .a0_o(a0)
+    .a0_o(a0),
+    .interrupt_i(int_i)
 );
 
 memoryunit #() memoryunit(

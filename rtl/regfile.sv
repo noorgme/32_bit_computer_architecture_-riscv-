@@ -4,6 +4,7 @@ module regfile #(
     input logic clk_i,
     input logic we3_i,
     input logic [ADR_WIDTH-1:0]a1_i, a2_i , a3_i,
+    input logic interrupt_i,
     input logic [DATA_WIDTH-1:0]wd3_i,
     output logic [DATA_WIDTH-1:0]rd1_o, rd2_o,
     output logic [DATA_WIDTH-1:0]a0_o
@@ -14,8 +15,10 @@ module regfile #(
 
     always_comb 
     begin
-        rd1_o = ramArray[a1_i];
-        rd2_o = ramArray[a2_i];
+        if (a1_i == 'h4) rd1_o = {32{interrupt_i}};
+        else rd1_o = ramArray[a1_i];
+        if (a2_i == 'h4) rd2_o = {32{interrupt_i}};
+        else rd2_o = ramArray[a2_i];
         a0_o = ramArray[10];
     end
 

@@ -26,3 +26,5 @@ fi
 cp ./scripts/assemble/.build/source.s.hex ./rtl/generated/instructionmemory.tmp.mem
 
 ./scripts/build.sh riscv
+
+./obj_dir/Vriscv $2

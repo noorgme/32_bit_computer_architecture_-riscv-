@@ -1,5 +1,5 @@
 # Who has done what
-
+(replace `src` with `rtl` in your mind)
 | Module | Ollie | Patrick | Jackson | Noor |
 | - | - | - | - | - |
 |`src/alu.sv` | M ||H|H|
@@ -11,17 +11,23 @@
 |`src/controlUnit_tb.cpp`| | | |M|
 |`src/datacontroller.sv`|M
 |`src/datamemory.sv`|H||M|H|
-|`src/instructionmemory.sv`|
-|`src/instructionmemory_tb.cpp`|
+|`src/instructionmemory.sv`| M|H
+|`src/instructionmemory_tb.cpp`| M
 |`src/mainDecoder.sv`||||M|
 |`src/memoryunit.sv`|M
 |`src/programcounter.sv`|||M|H|
 |`src/regfile.sv`|M
 |`src/regfile_tb.cpp`|M
-|`src/riscv.sv`|||H|H|
-|`src/riscv_tb.cpp`|
-|`src/signextend.sv`||||H|
+|`src/riscv.sv`||M|H|H|
+|`src/riscv_tb.cpp`||M
+|`src/signextend.sv`||M||H|
 |`src/signextend_tb.cpp`|
+|`scripts/`||M
+|`test/`||M
+|Caching|M|
+|Pipelining||M
+|Vbuddy Integration||H|M|H
+
 
 |Key|
 |-|

@@ -19,6 +19,7 @@ int main(int argc, char **argv, char **env) {
  
   top->clk_i = 0;
   top->rst_i = 0;
+  top->int_i = 0;
 
   int count = 0;
 
@@ -43,6 +44,10 @@ int main(int argc, char **argv, char **env) {
     top->clk_i = !top->clk_i;
     top->eval();
     tfp->dump(count);
+
+    if (count > 20) {
+      top->int_i = 1;
+    };
 
     if (Verilated::gotFinish()) exit(0);
   };

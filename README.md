@@ -17,3 +17,13 @@ Together with this, we have created psuedo random number generation to control t
 We feel that the project as a whole went well & we had a mostly working cpu from early on, making use of branches to add extra features without breaking main. 
 Further [evidence](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/blob/4c0a8b197b3083ae039e424b2793e2dd9bf84c22/test/readme.md) for these can be seen in the 
 [commit history](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/commits/main).
+
+
+### Contributions:
+Ollie: Register file, reformatting data memory for integration with caching, instruction memory, register file, caching
+
+Noor: Control unit and subnmodules, decoder, help on other modules
+
+Jackson: Data memory, program counter, vbuddy integration,
+
+Patrick: Top level, sign extension, pipelining, all build scripts and most test programs

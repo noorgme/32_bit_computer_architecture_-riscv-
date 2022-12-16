@@ -1,8 +1,8 @@
 module memoryunit #(
     parameter   DATA_WIDTH = 32, 
                 ADDRESS_WIDTH = 32, 
-                MEMORY_SIZE = 14, 
-                SOURCE_FILE = "datamemory.mem"
+                MEMORY_SIZE = 16, 
+                SOURCE_FILE = "triangle.mem"
 )(
     input logic     [ADDRESS_WIDTH-1:0] address_i,
     input logic     [DATA_WIDTH-1:0]    writeData_i,

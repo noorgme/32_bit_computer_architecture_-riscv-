@@ -19,7 +19,7 @@ module datamemory #(
     initial 
     begin
         $display("Loading Data Memory...");
-        $readmemh({"./rtl/generated/",SOURCE_FILE}, dataMem);
+        $readmemh({"./reference/dataarrays/",SOURCE_FILE}, dataMem);
         $display("Done loading");
     end;
 

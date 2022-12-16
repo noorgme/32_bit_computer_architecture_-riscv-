@@ -3,6 +3,7 @@
 #include "Vriscv.h"
 #include <unistd.h>
 #include <iostream>
+#include "vbuddy.cpp"
 
 #include "lib/testutils.h"
 
@@ -13,7 +14,7 @@ void draw_lights(Vriscv* top) {
   int lights = top->dataOut_o;
   std::cout << std::endl << std::endl << std::endl;
 
-  for (int lindex = 0; lindex<5; lindex++) {
+  for (int lindex = 0; lindex<8; lindex++) {
     bool thislight = (lights >> lindex) & 1;
     if (thislight) {
       std::cout << "X";
@@ -34,6 +35,9 @@ int main(int argc, char **argv, char **env) {
   VerilatedVcdC* tfp = new VerilatedVcdC;
   top->trace (tfp, 99);
   tfp->open ("riscv.vcd");
+
+  if(vbdOpen() != 1) return(-1);
+  vbdHeader("F1 LIGHTS");
  
   uint sleeptime = 0;
   
@@ -64,23 +68,28 @@ int main(int argc, char **argv, char **env) {
   count++;
 
   while (count < 10000) {
-    usleep(sleeptime);
+    //usleep(sleeptime);
     count++;
     top->clk_i = !top->clk_i;
     top->eval();
     tfp->dump(count);
-    if (sleeptime>0) {
-      draw_lights(top);
-      if (top->dataOut_o == 0) {
-        exit(0);
-      }
-    };
+
+    vbdCycle(count);
+
+    //if (sleeptime>0) {
+      //draw_lights(top);
+      //if (top->dataOut_o == 0) {
+        //exit(0);
+      //}
+    //};
+
+    vbdBar(top->dataOut_o & 0xFF);
 
     if (count > 20) {
       top->int_i = 1;
     };
 
-    if (Verilated::gotFinish()) exit(0);
+    if (Verilated::gotFinish() || (vbdGetkey() == 'q')) exit(0);
   };
 
   tfp->close();

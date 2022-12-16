@@ -5,7 +5,7 @@ I made lots of mistakes along the way of inefficient data manipulation, wasting 
 
 ## Contribution and design decisons:
 
-##### If too long read section on caching
+##### If too long read section on `cache.sv`
 
 ### Making `alu.sv`, `regfile.sv` and related testbenches
 I copied over my ALU and Regfile these needed little changing I added some more functionality to ALU for readability I used enumeration and created there associated, for the tests I varied inputs in the upper limits and compared the output to expected values as this Is where I foresaw the most errors coming from.

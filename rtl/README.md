@@ -2,23 +2,23 @@
 
 | Module | Ollie | Patrick | Jackson | Noor |
 | - | - | - | - | - |
-|`src/alu.sv` | M 
-|`src/alu_tb.cpp`|M
-|`src/aluDecoder.sv`|
+|`src/alu.sv` | M ||H
+|`src/alu_tb.cpp`|M||H
+|`src/aluDecoder.sv`|||H
 |`src/blockwrite.sv`|M
 |`src/cache.sv`|M
-|`src/controlUnit.sv`|
+|`src/controlUnit.sv`|||H
 |`src/controlUnit_tb.cpp`|
 |`src/datacontroller.sv`|M
-|`src/datamemory.sv`|H
+|`src/datamemory.sv`|H||M
 |`src/instructionmemory.sv`|
 |`src/instructionmemory_tb.cpp`|
 |`src/mainDecoder.sv`|
 |`src/memoryunit.sv`|M
-|`src/programcounter.sv`|
+|`src/programcounter.sv`|||M
 |`src/regfile.sv`|M
 |`src/regfile_tb.cpp`|M
-|`src/riscv.sv`|
+|`src/riscv.sv`|||H
 |`src/riscv_tb.cpp`|
 |`src/signextend.sv`|
 |`src/signextend_tb.cpp`|

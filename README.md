@@ -11,3 +11,5 @@ Evidence of program execution in [test](/test)
 ## CPU with memory cache and pipelining (no hazard detection) in branch [Cache](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/tree/Cache)
 
 # Group Statement:
+
+We have worked in collaboration over this project to develop a pipelined risc-v processor with cache memory that has been tested & verified to be working on the vbuddy [evidence of pipelining & cache](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/WhatsApp Video 2022-12-16 at 18.02.36.mp4)

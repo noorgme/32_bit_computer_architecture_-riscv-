@@ -1,12 +1,14 @@
-# a0: light output
-# a1: parameter to subroutine_wait_a1, number of cycles to wait
-# tp: interrupt source
-# a2: cycles before button pressed used for PRNG
 
 main:
 li a0, 0b1111111100000000 # Set a0 to make all bits 1 except bottom 8 bits which = 0, so all lights are off but we can change the lights by simply shifting right
 addi x29, x29, 0b11111111 # Use x29 to store what the value of a0 will be once the lights have counted up to full (i.e. all lights are 1)
 addi a2, x0, 0
+
+# a0: light output
+# a1: parameter to subroutine_wait_a1, number of cycles to wait
+# tp: interrupt source
+# a2: cycles before button pressed used for PRNG
+
 
 wait_start:
 addi a2, a2, 1

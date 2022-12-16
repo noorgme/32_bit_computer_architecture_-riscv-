@@ -15,7 +15,7 @@ addi a2, a2, 1
 beq tp, x0, wait_start
 
 chop_up:
-slli a2, a2, 29 # chop off all but bottom 3 bits of delay timer, now a2 has max value of 15
+slli a2, a2, 29 # chop off all but bottom 3 bits of delay timer, now a2 has max value of 7
 srli a2, a2, 29
 
 addi a1, x0, 10 # count up cycle count
@@ -27,7 +27,8 @@ srli a0, a0, 1 # shift lights over
 bne a0, x29, count_lights_down # repeat
 
 final_lightsout_random_wait:
-addi a1, a2, 4 # copy a2 into a1 and add 4 for a lower bound
+addi a1, a2, 1 # copy a2 into a1 and add 2 for a lower bound
+add a1, a1, a1 # double
 jal ra, subroutine_wait_a1 # wait for lights off
 addi a0, x0, 0b0 # turn off lights
 
@@ -36,8 +37,6 @@ jal x0, end
 
 subroutine_wait_a1:
 addi x28, a1, 0
-addi x28, x28, 0
-# multiply param by 2
 dec_x28:
 addi x28, x28, -1
 bne x28, x0, dec_x28

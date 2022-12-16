@@ -74,6 +74,8 @@ int main(int argc, char **argv, char **env) {
     top->eval();
     tfp->dump(count);
 
+    top->int_i = vbdFlag();
+
     vbdCycle(count);
 
     //if (sleeptime>0) {

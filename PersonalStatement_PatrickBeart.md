@@ -5,12 +5,16 @@ This project took me from having some limited knowledge of assembly programming 
 
 ## Contributions
 - Top-level design ```riscv.sv```, responsibility for instruction memory ```instructionmemory.sv``` and design and implementation of pipelining.
-- Bug fixes/validating (as did all other group members), easiest to see from commit history but e.g. fixing readmemh incorrectly loading memory by stripping spaces, changing memory to prevent writing to x0...
+- Bug fixes/validating (as did all other group members), easiest to see from commit history but e.g. fixing readmemh incorrectly loading memory by stripping spaces [commit 3cfba](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/commit/3cfba6d6f32c2dc519f3f27cac0f2929b2259177), changing memory to prevent writing to x0 [commit 23fc9](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/commit/23fc90d2a81f3ee4f425a02e4994245328fbab26)
 - All build scripts  in ```./scripts``` (some of those in ```./scripts/assemble``` build on Prof. Cheung's scripts), as well as a script to automatically generate disassembly and format it so that it can be loaded into gtkWave and show instructions as assembly, and assert helper macro in ```/src/lib```.
 - Test programs in ```/test/testcases``` and most in ```/test/samples``` which helped spot several bugs.
+- Implementing final F1 program
+
+## Notable work and some challenges
+- I wrote the startlights.riscv.s program from a combination of what we all agreed we liked about the programs in `./test/samples/startlights`, but had to add the pseudorandom delay aspect. Given that we had not implemented multiplication, division or modulo it would have been tedious to implement a 'standard' PRNG algorithm, but since our seed was the number of clock cycles until the start button is pressed, which has a lot of information, I decided to simply truncate that number down to its last 3 bits and use that as the seed by shifting left and then right. This only gives 3 bits of entropy but this could be improved upon if a faster simulator were used as more and more bits of the counter would become hard to determine by the operator of the button.
 
 ## Mistakes/would do differently
-- It would have been significantly easier and simpler to implement pipelining if we had achieved full separation of concerns between modules from the start (i.e. ensuring each module takes only the inputs it needs and ideally avoid multiple stages of combinatoric logic), as this would have allowed pipelining to simply add clocked delays between each signal as shown on the diagram: I decided that we did not have enough time left to rewrite modules in a separated way so I instead decided that it was preferable to add clocked behaviour to the control unit so it could delay its internal signals
+- It would have been significantly easier and simpler to implement pipelining if we had achieved full separation of concerns between modules from the start (i.e. ensuring each module takes only the inputs it needs and ideally avoid multiple stages of combinatoric logic), as this would have allowed pipelining to simply add clocked delays between each signal as shown on the diagram: I decided that we did not have enough time left to rewrite modules in a separated way so I instead decided that it was preferable to add clocked behaviour to the control unit so it could delay its internal signals for pipelining.
 
 ## Design Decisions
 Consequential design decisions I made during the project:

@@ -153,7 +153,7 @@ signextend #() signextend(
 final 
 begin
     $display("Writing register dump...");
-    $writememh("./src/generated/registerdump.tmp.mem", registerfile.ramArray);
+    $writememh("./rtl/generated/registerdump.tmp.mem", registerfile.ramArray);
     $display("Done writing register dump");
 end;
 

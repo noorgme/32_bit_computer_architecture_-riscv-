@@ -45,6 +45,7 @@ int main(int argc, char **argv, char **env) {
     sleeptime = atoi(argv[1]);
     std::cout << "Loading simulation with cycle time of " << sleeptime << "us..." << std::endl;
   };
+
   top->clk_i = 0;
   top->rst_i = 0;
   top->int_i = 0;
@@ -86,10 +87,6 @@ int main(int argc, char **argv, char **env) {
     //};
 
     vbdBar(top->dataOut_o & 0xFF);
-
-    if (count > 20) {
-      top->int_i = 1;
-    };
 
     if (Verilated::gotFinish() || (vbdGetkey() == 'q')) exit(0);
   };

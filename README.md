@@ -24,6 +24,6 @@ Ollie: Register file, reformatting data memory for integration with caching, ins
 
 Noor: Control unit and subnmodules, decoder, help on other modules
 
-Jackson: Data memory, program counter, vbuddy integration,
+Jackson: Data memory, program counter, vbuddy integration, some alu & instruction implementation, contributions on decoders
 
 Patrick: Top level, sign extension, pipelining, all build scripts and most test programs

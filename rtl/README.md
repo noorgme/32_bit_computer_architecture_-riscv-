@@ -37,7 +37,7 @@
 ## Summary
 Ollie: Register file, reformatting data memory for integration with caching, instruction memory, register file, caching
 
-Noor: Control unit and subnmodules, decoder, help on other modules
+Noor: Control unit and submodules, decoder, help on other modules/debugging, JAL and JALR implementation, ALU Branch conditions/some case matching
 
 Jackson: Data memory, program counter, vbuddy integration, 
 
@@ -122,7 +122,12 @@ Dec 3: Pushed my top-level schematic from initial lab
 Dec 4: Created first draft of control unit
 
 Dec 5: Finalised aluDecoder and mainDecoder with respective gtkwave simulations and top-level tests, merged changes to main.
-   
+
+ 
+Dec 11: Added BLT, BGE, BGEU, BLTU control signals and condition evaluation
+
+Dec 11: Added remaining I-type control signals e.g. xori
+
 ### `memoryunit.sv` and `datacontroller.sv`
 #### Ollie Cosgrove:
 dec 14: Created `memoryunit.sv` to separate out the different components of the `datamemory.sv`.
@@ -138,3 +143,12 @@ dec 15: Created `cache.sv` and sub module `blockwrite.sv` this is a design for s
 
 ### `datamemory.sv`
 dec 15: made a change so blocks would be outputted.
+
+####
+#### Noor Elsheikh
+
+Dec 12: Verified JAL/R, RET functioning
+
+Dec 13: Verified refprog pdf_array initialisation
+
+Dec 16: Added reference program loop1/loop2 waveform verification with memory unit adjustment

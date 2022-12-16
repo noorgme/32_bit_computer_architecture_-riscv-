@@ -1,7 +1,7 @@
 main:
     addi a0, x0, 0b0
     addi a3, x0, 0b11111111
-    addi a4, x0, 30 #delay
+    addi a4, x0, 15 #delay
 
 display_lights:
     jal ra, subroutine_add_light

@@ -6,6 +6,6 @@
 
 ## Pipelined CPU (no hazard detection) in branch [pipeline](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/tree/pipeline)
 
-## CPU with memory cache and pipelining (no hazard detection) in branch [cache-and-pipelining](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/tree/cache-and-pipelining)
+## CPU with memory cache and pipelining (no hazard detection) in branch [Cache](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-2/tree/Cache)
 
 # Group Statement:

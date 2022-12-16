@@ -11,7 +11,6 @@ At the start of this project, I had a limited understanding of system-verilog & 
 - Addition of extra instructions `alu.sv`, `alu_tb.cpp`, `aluDecoder.sv`, `controlUnit.sv`, `riscv.sv` involved changing width of aluControl signal to include added instructions & implementation with branch instructions etc. 
 - Bug fixes/validation of others pull requests & general tesbench creation/use
 - General cleanup of code for obvious inputs & outputs
-- Added vbuddy compatability at end of coursework
 
 ## Mistakes
 

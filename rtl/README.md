@@ -44,19 +44,11 @@ Nov 30: Copied control unit I wrote over from Lab 4
 
 #### Ollie Cosgrove:
 Dec 12: Spotted bugs with the JAL and JALR instructions so changed `controlunit.sv` to fix the bugs. 
-
-#### Jackson Barlow:
-Dec 12: Added bit fixes in control unit for extra instructions
-Dec 15: Cleaned up control unit
-
 ### `instructionmemory.sv` and `instructionmemory_tb.cpp`
 #### Patrick Beart:
 Dec 1: Wrote instruction memory and a testbench which checks that value changes on clock edge
 #### Ollie Cosgrove:
 Dec 11: Spotted that there was problems with jump instructions caused by the read on IR being sync and not async.
-#### Jackson Barlow:
-Dec 15: Cleaned up instruction memory
-
 
 ### `signextend.sv` and `signextend_tb.cpp`
 #### Patrick Beart:
@@ -64,29 +56,16 @@ Nov 30-Dec 1: Copied sign extension I wrote from lab 4 and added assert_message 
 
 #### Ollie Cosgrove:
 Dec 11: Added an extend for LUI.
-
-#### Jackson Barlow:
-Dec 15: Cleaned up sign extension
-
 ### `alu.sv` and `alu_tb.cpp`
 
 #### Ollie Cosgrove:
 Dec 2: Copied over the code form LAB 4 <br>
 Dec 3: Edited `alu.sv` to include new functions and comparisons and wrote a testbench to test the ALU every test came back okay. 
-
-#### Jackson Barlow: 
-Dec 12: Added SLL, SRL, SRA, XOR
-Dec 13: new instructions test program
-Dec 15: Cleaned up alu
-
 ### `regfile.sv` and `regfile_tb.cpp` 
 #### Ollie Cosgrove:
 
 Dec 2: Copied over from LAB 4 along with `aluregfile.sv` and `aluregfile_tb.cpp` <br>
 Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using Fibonacci numbers as this would test all the functionality.
-
-#### Jackson Barlow:
-Dec 15: Cleaned up regfile
 
 ### `pc.sv` and `programCounter_tb.cpp`
 #### Jackson Barlow:
@@ -94,9 +73,6 @@ Dec 3: Added single .sv file program counter and test file for it (untested), th
 Dec 4: Corrected error in `pc.sv`, where test file expected to use extra output "count" (This is necessary for testing but will be removed for final use)
 #### Ollie Cosgrove:
 Dec 12: There was a problem with the PC as PC <= nextPC and PCplus4 <= PC + 4 where in a always_ff block this caused problems with executing add instructions as the PC was held for two cycles so changed this and fixed a combinational loop and for JAL the PC <= sext(Immop) when is should equal PC <= PC + sext(Immop).
-#### Jackson Barlow:
-Dec 15: Cleaned up PC 
-
 ### `datamemory.sv` and `datamemory_tb.cpp`
 #### Jackson Barlow:
 Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently, created `datamemory_tb.cpp`
@@ -108,10 +84,6 @@ Dec 6: Test data & results for datamemory, test data updated to include write & 
 Dec 7: Changed `datamemory.sv` slightly so the first to bits are ignored and the size of the memory can be set with a parameter as it is not possible to have a data memory of 4Gb.
 Dec 9: I overhauled `datamemory.sv` to include lb,lbu,lh,lhu,sb and sh I did to avoid a ridiculously long case statement I used a smaller case statement and bit shifters and added an input of funct3 to work out the output. 
 Dec 14: Changed `datamemory.sv` to use 2'D packed arrays as this made data manipulation a lot easier.
-
-#### Jackson Barlow:
-
-Dec 15: Cleaned up datamemory
 
 ### `riscv.sv` and `riscv_tb.cpp`
 #### Noor Elsheikh:
@@ -126,10 +98,6 @@ Dec 8: Implemented JAL instruction with the following top-level changes
 #### Ollie Cosgrove:
 Dec 11: Increased the size of the MUX into WD3 of the `regfile.sv` to make LUI and JAL possible.
 
-#### Jackson Barlow: 
-Dec 12: Changed bit widths to add new instructions
-Dec 15: Cleaned up riscv
-
 ### `mainDecoder.sv`, `aluDecoder.sv`, `controlUnit.sv`
 #### Noor Elsheikh
 Dec 3: Pushed my top-level schematic from initial lab
@@ -137,19 +105,12 @@ Dec 3: Pushed my top-level schematic from initial lab
 Dec 4: Created first draft of control unit
 
 Dec 5: Finalised aluDecoder and mainDecoder with respective gtkwave simulations and top-level tests, merged changes to main.
-
-##### Jackson Barlow
-Dec 12: Changed bit width to allow for new instructions SRA etc.
-Dec 15: Cleaned up decoders
    
 ### `memoryunit.sv` and `datacontroller.sv`
 #### Ollie Cosgrove:
 dec 14: Created `memoryunit.sv` to separate out the different components of the `datamemory.sv`.
 dec 14: Created `datacontroller.sv` from `datamemory.sv` this controls the inputs and outputs to `datamemory.sv` to make the memory byte and half addressable.
 dec 15: Simplified `datacontroller.sv` using packed arrays
-
-#### Jackson Barlow:
-Dec 15: Cleaned up
 
 ## Branch `cache-and-pipelining` 
 

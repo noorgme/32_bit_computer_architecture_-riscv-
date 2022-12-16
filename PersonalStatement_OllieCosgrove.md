@@ -3,7 +3,7 @@
 ## Mistakes and learning:
 I made lots of mistakes along the way of inefficient data manipulation, wasting lots of code, time and brain power. if I was to somthing like this again I would spend more time researching into different functions and data types. I have come a long way with my understanding of system verilog, and I have a more detailed understanding of the RISV32I microarchitecture.
 
-## Contribution, Challenges and design decisons:
+## Contribution and design decisons:
 
 ##### If too long read section on `cache.sv`
 

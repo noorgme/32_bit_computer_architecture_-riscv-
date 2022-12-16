@@ -10,7 +10,7 @@
 
 void draw_lights(Vriscv* top) {
   
-  int lights = top->data_out_o;
+  int lights = top->dataOut_o;
   std::cout << std::endl << std::endl << std::endl;
 
   for (int lindex = 0; lindex<5; lindex++) {
@@ -70,7 +70,7 @@ int main(int argc, char **argv, char **env) {
     tfp->dump(count);
     if (sleeptime>0) {
       draw_lights(top);
-      if (top->data_out_o == 0) {
+      if (top->dataOut_o == 0) {
         exit(0);
       }
     };

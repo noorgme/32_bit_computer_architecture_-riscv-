@@ -25,6 +25,7 @@ void draw_lights(Vriscv* top) {
 }
 
 int main(int argc, char **argv, char **env) {
+
   Verilated::commandArgs(argc, argv);
   // init top verilog instance
   Vriscv* top = new Vriscv;
@@ -42,6 +43,7 @@ int main(int argc, char **argv, char **env) {
   };
   top->clk_i = 0;
   top->rst_i = 0;
+
   int count = 0;
 
   top->eval();
@@ -49,11 +51,13 @@ int main(int argc, char **argv, char **env) {
   count++;
 
   top->rst_i = 1;
+
   top->eval();
   tfp->dump(count);
   count++;
 
   top->rst_i = 0;
+  
   top->eval();
   tfp->dump(count);
   count++;

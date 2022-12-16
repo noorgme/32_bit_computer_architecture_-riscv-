@@ -1,4 +1,34 @@
 # Who has done what
+
+| Module | Ollie | Patrick | Jackson | Noor |
+| - | - | - | - | - |
+|`src/alu.sv` | M ||H
+|`src/alu_tb.cpp`|M||H
+|`src/aluDecoder.sv`|||H
+|`src/blockwrite.sv`|M
+|`src/cache.sv`|M
+|`src/controlUnit.sv`|||H
+|`src/controlUnit_tb.cpp`|
+|`src/datacontroller.sv`|M
+|`src/datamemory.sv`|H||M
+|`src/instructionmemory.sv`|
+|`src/instructionmemory_tb.cpp`|
+|`src/mainDecoder.sv`|
+|`src/memoryunit.sv`|M
+|`src/programcounter.sv`|||M
+|`src/regfile.sv`|M
+|`src/regfile_tb.cpp`|M
+|`src/riscv.sv`|||H
+|`src/riscv_tb.cpp`|
+|`src/signextend.sv`|
+|`src/signextend_tb.cpp`|
+
+|Key|
+|-|
+|M = Main Contributer|
+|H = Also Helped|
+
+## Branches for assessing `main` and  `cache-and-pipelining`
 ## `/src/lib/`
 ### `testutils.h`
 #### Patrick Beart:
@@ -18,7 +48,7 @@ Dec 12: Spotted bugs with the JAL and JALR instructions so changed `controlunit.
 #### Patrick Beart:
 Dec 1: Wrote instruction memory and a testbench which checks that value changes on clock edge
 #### Ollie Cosgrove:
-Dec 11: Spoted that there was problems with jump instructions caused by the read on IR being sync and not async.
+Dec 11: Spotted that there was problems with jump instructions caused by the read on IR being sync and not async.
 
 ### `signextend.sv` and `signextend_tb.cpp`
 #### Patrick Beart:
@@ -29,50 +59,31 @@ Dec 11: Added an extend for LUI.
 ### `alu.sv` and `alu_tb.cpp`
 
 #### Ollie Cosgrove:
-Dec 2: Coppied over the code form LAB 4 <br>
-Dec 3: Eddited `alu.sv` to include new functions and comparisons and wrote a testbench to test the ALU every test came back okay. 
+Dec 2: Copied over the code form LAB 4 <br>
+Dec 3: Edited `alu.sv` to include new functions and comparisons and wrote a testbench to test the ALU every test came back okay. 
 ### `regfile.sv` and `regfile_tb.cpp` 
 #### Ollie Cosgrove:
 
-Dec 2: Coppied over from LAB 4 along with `aluregfile.sv` and `aluregfile_tb.cpp` <br>
-Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using fibonacci numbers as this would test all the functionality.
+Dec 2: Copied over from LAB 4 along with `aluregfile.sv` and `aluregfile_tb.cpp` <br>
+Dec 3: Changed `aluregfile_tb.cpp` to have a more solid test using Fibonacci numbers as this would test all the functionality.
 
 ### `pc.sv` and `programCounter_tb.cpp`
 #### Jackson Barlow:
 Dec 3: Added single .sv file program counter and test file for it (untested), then updated test file to use correct verilated file
 Dec 4: Corrected error in `pc.sv`, where test file expected to use extra output "count" (This is necessary for testing but will be removed for final use)
 #### Ollie Cosgrove:
-Dec 12: There was a problem with the PC as PC <= nextPC and PCplus4 <= PC + 4 where in a always_ff block this caused problems with executing add instructions as the PC was held for two cycles so changed this and fixed a combonational loop and for JAL the PC <= sext(Immop) when is should equal PC <= PC + sext(Immop).
+Dec 12: There was a problem with the PC as PC <= nextPC and PCplus4 <= PC + 4 where in a always_ff block this caused problems with executing add instructions as the PC was held for two cycles so changed this and fixed a combinational loop and for JAL the PC <= sext(Immop) when is should equal PC <= PC + sext(Immop).
 ### `datamemory.sv` and `datamemory_tb.cpp`
 #### Jackson Barlow:
 Dec 5: Created data memory sheet, with read/write ROM functionality. Input sigs (A = address, WD = write data, WE = write enable, clk), Output sigs (RD = read data). Untested currently, created `datamemory_tb.cpp`
 
 Dec 6: Test data & results for datamemory, test data updated to include write & read test:
 
-|RAM Location|DataStored|DataRead (next cycle)|
-| --- | --- | --- |
-|1|1CB|1CB|
-|2|1CA|1CA|
-|...|...|...|
-|12|1BA|1BA|
-|13|1B9|1B9|
-
-We then continue to read this again with write enable = 1, and if the output from memory is still the value before it is changed, then the datamemory component is working correctly
-
-|RAM Location|DataRead (next cycle)|
-| --- | --- |
-|1|1CB|
-|2|1CA|
-|...|...|
-|12|1BA|
-|13|1B9|
-
-Here, we can see that everything is working as expected & `datamemory.sv` is correct
-
 #### Ollie Cosgrove:
 
 Dec 7: Changed `datamemory.sv` slightly so the first to bits are ignored and the size of the memory can be set with a parameter as it is not possible to have a data memory of 4Gb.
-Dec 9: I overhauled `datamemory.sv` to include lb,lbu,lh,lhu,sb and sh I did to advoid a ridiculously long case statment I used a smaller case statment and bit shifters and added an input of funct3 to work out the output. 
+Dec 9: I overhauled `datamemory.sv` to include lb,lbu,lh,lhu,sb and sh I did to avoid a ridiculously long case statement I used a smaller case statement and bit shifters and added an input of funct3 to work out the output. 
+Dec 14: Changed `datamemory.sv` to use 2'D packed arrays as this made data manipulation a lot easier.
 
 ### `riscv.sv` and `riscv_tb.cpp`
 #### Noor Elsheikh:
@@ -95,6 +106,18 @@ Dec 4: Created first draft of control unit
 
 Dec 5: Finalised aluDecoder and mainDecoder with respective gtkwave simulations and top-level tests, merged changes to main.
    
+### `memoryunit.sv` and `datacontroller.sv`
+#### Ollie Cosgrove:
+dec 14: Created `memoryunit.sv` to separate out the different components of the `datamemory.sv`.
+dec 14: Created `datacontroller.sv` from `datamemory.sv` this controls the inputs and outputs to `datamemory.sv` to make the memory byte and half addressable.
+dec 15: Simplified `datacontroller.sv` using packed arrays
 
+## Branch `cache-and-pipelining` 
 
+### `cache.sv` and `blockwrite.sv`
 
+#### Ollie Cosgrove:
+dec 15: Created `cache.sv` and sub module `blockwrite.sv` this is a design for spatial locality. with changeable cache size and block size.
+
+### `datamemory.sv`
+dec 15: made a change so blocks would be outputted.

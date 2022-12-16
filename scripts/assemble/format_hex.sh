@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Credit: pykcheung (Prof. Cheung)
+# Credit: pykcheung (Prof. Cheung), modified heavily by patrick beart
 
 set -euo pipefail
 

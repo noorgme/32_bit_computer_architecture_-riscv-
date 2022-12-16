@@ -12,8 +12,8 @@ forever:
 init:
     LI      a1, 0xff                #loopcount a1 = 255
 _loop1:
-    SB      zero, base_pdf(a1)      #mem[base_pdf+a1] = 0
     ADDI    a1, a1, -1            #decrement a1 - changed from addi a1, zero, -1 as that doesn't decrement it 
+    SB      zero, base_pdf(a1)      #mem[base_pdf+a1] = 0
     BNE     a1, zero, _loop1         #repeat if a1 != 0
     RET                              #return to main
 

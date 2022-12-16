@@ -15,7 +15,7 @@
 |`src/instructionmemory_tb.cpp`| M
 |`src/mainDecoder.sv`||||M|
 |`src/memoryunit.sv`|M
-|`src/programcounter.sv`|||M|H|
+|`src/programcounter.sv`||H|M|H|
 |`src/regfile.sv`|M
 |`src/regfile_tb.cpp`|M
 |`src/riscv.sv`||M|H|H|
@@ -28,13 +28,24 @@
 |Pipelining||M
 |Vbuddy Integration||H|M|H
 
-
 |Key|
 |-|
 |M = Main Contributer|
 |H = Also Helped|
 
-## Branches for assessing `main` and  `cache-and-pipelining`
+
+## Summary
+Ollie: Register file, reformatting data memory for integration with caching, instruction memory, register file, caching
+
+Noor: Control unit and subnmodules, decoder, help on other modules
+
+Jackson: Data memory, program counter, vbuddy integration, 
+
+Patrick: Top level, sign extension, pipelining, all build scripts and most test programs
+
+## Non-exhaustive log of work to help write the above is below:
+
+### Branches for assessing `main`, `cache-and-pipelining` and `pipelining`
 ## `/src/lib/`
 ### `testutils.h`
 #### Patrick Beart:
